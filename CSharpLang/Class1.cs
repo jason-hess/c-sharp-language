@@ -55,11 +55,12 @@ namespace CSharpLang
             var value = secondTuple.Item2 + secondTuple.Item1;
 
             // In C# 7.0 Tuples are now understood in the language:
-            var x = (1, 2);
-            x.Item1++;
-            x.Item2++;
+            var thirdTuple = (1, 2);
+            value = thirdTuple.Item1 + thirdTuple.Item2;
 
-
+            // Tuple member names can also be specified
+            var fourthTuple = (Alpha: "1", Beta: "2");
+            var stringValue = $"{fourthTuple.Alpha}{fourthTuple.Beta}";
         }
     }
 }
