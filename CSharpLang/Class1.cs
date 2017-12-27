@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace CSharpLang
 {
@@ -14,11 +15,21 @@ namespace CSharpLang
                 
             }
 
-            // in C# 7.0
+            // in C# 7.0 the out variable can be declared inline.
+            // It's scope is leaked out to the outer scope
             if (int.TryParse("1", out int theResult))
             {
                 
             }
+            Console.WriteLine(theResult);
+
+            // in C# 7.0 you can also declare an implicit variable
+            if (int.TryParse("1", out var aResult))
+            {
+                
+            }
+            Console.WriteLine(aResult);
+
         }
     }
 }
