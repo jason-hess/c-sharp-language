@@ -5,6 +5,9 @@ namespace CSharpLang
 {
     public class Class1
     {
+        /// <summary>
+        /// In C# 7.0 you now can declare a variable for an out parmeter inline
+        /// </summary>
         [Test]
         public void CanInlineDeclareOutParameterVariables()
         {
@@ -23,7 +26,7 @@ namespace CSharpLang
             }
             Console.WriteLine(theResult);
 
-            // in C# 7.0 you can also declare an implicit variable
+            // in C# 7.0 you can also declare an implicit (i.e. "var") variable
             if (int.TryParse("1", out var aResult))
             {
                 
