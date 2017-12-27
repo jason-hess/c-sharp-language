@@ -61,6 +61,27 @@ namespace CSharpLang
             // Tuple member names can also be specified
             var fourthTuple = (Alpha: "1", Beta: "2");
             var stringValue = $"{fourthTuple.Alpha}{fourthTuple.Beta}";
+            // Note: These names are only preserved at compile time
+            // Question: Do they work across assmeblies?
+
+            // Tuple member names can be re-specified
+            (string Alpha, string Beta) fifthTuple = ("1", "2");
+            Console.WriteLine(fifthTuple.Alpha);
+
+            // Methods can specify Tuple member names
+            var sixthTuple = TupleReturningMethod();
+            var member = sixthTuple.Alpha;
         }
+
+        /// <summary>
+        /// Methods returning Tuples are useful
+        /// </summary>
+        /// <returns></returns>
+        public (string Alpha, string Beta) TupleReturningMethod()
+        {
+            return ("1", "2");
+        }
+
+
     }
 }
