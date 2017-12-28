@@ -6,7 +6,7 @@ namespace CSharpLang
     /// <summary>
     /// In C# 7.0 you now can declare a variable for an out parmeter inline
     /// </summary>
-    public class InlineOutParameters
+    public class OutParameterBehaviour
     {
         private OutParmeterExamples _underTest;
 

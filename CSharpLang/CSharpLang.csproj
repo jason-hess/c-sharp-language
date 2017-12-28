@@ -44,8 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="InlineOutParameters.cs" />
+    <Compile Include="TupleBehaviour.cs" />
+    <Compile Include="OutParameterBehaviour.cs" />
     <Compile Include="OutParmeterExamples.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -19,16 +19,41 @@ namespace CSharpLang
     /// much unlike classes and structs.
     /// 
     /// If you want data and behaviour then use a class, otherwise if you want to return
-    /// more than one value from a method, you could return a Tuple
+    /// more than one value from a method, you could return a Tuple.
     /// </summary>
-    public class Class1
+    public class TupleBehaviour
     {
-        
+        /// <summary>
+        /// .NET 4.0 introduced `System.Tuple` which is a `class` that was 
+        /// intended as a way to store multiple values without the need 
+        /// for creating a new `class` or `struct`
+        /// </summary>
         [Test]
-        public void LanguageSupportForTuples()
+        public void SystemTuple()
         {
-            // prior to C# 7.0
-            var firstTuple = new Tuple<int, int>(1, 2);
+            var tuple = new Tuple<int, int>(1, 2);
+            // Tuple elments in Sytem.Tuple are accessed through .Item1, .Item2, etc.
+            
+            Assert.AreNotEqual(tuple.Item1, tuple.Item2);
+        }
+
+        /// <summary>
+        /// Tuples can also be created with Tuple.Create()
+        /// </summary>
+        [Test]
+        public void SystemTupleCreate()
+        {
+            var tuple = Tuple.Create("A", "B", "C");
+            var secondTuple = new Tuple<string, string, string>("A", "B", "C");
+
+            Assert.AreEqual(tuple, secondTuple);
+
+            Assert.AreEqual(tuple.Item1)
+        }
+
+        [Test]
+        public void Test()
+        {
             var secondTuple = Tuple.Create(1, 2);
             int secondTupleValue = secondTuple.Item2 + secondTuple.Item1;
 
