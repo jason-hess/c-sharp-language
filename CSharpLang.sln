@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLang", "CSharpLang\CSharpLang.csproj", "{683BA4E7-1434-40ED-8107-076DA63D03F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TupleAssembly", "TupleAssembly\TupleAssembly.csproj", "{C24A25C8-E60A-4AD8-B912-ECA25D37D8EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{683BA4E7-1434-40ED-8107-076DA63D03F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{683BA4E7-1434-40ED-8107-076DA63D03F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{683BA4E7-1434-40ED-8107-076DA63D03F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C24A25C8-E60A-4AD8-B912-ECA25D37D8EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C24A25C8-E60A-4AD8-B912-ECA25D37D8EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C24A25C8-E60A-4AD8-B912-ECA25D37D8EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C24A25C8-E60A-4AD8-B912-ECA25D37D8EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
