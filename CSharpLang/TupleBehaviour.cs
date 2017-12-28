@@ -4,6 +4,24 @@ using NUnit.Framework;
 namespace CSharpLang
 {
     /// <summary>
+    /// C# 7.0 adds support for write-only variables that you don't intend to 
+    /// use.
+    /// </summary>
+    public class DiscardBehaviour
+    {
+
+
+        [Test]
+        public void Test()
+        {
+            var tuple = (Year: 1996, Age: 21, Sex: "Male");
+            // Deconstuct the tuple, but don't care about the year:
+            var (_, age, _) = tuple;
+            Assert.AreEqual(tuple.Age, age);
+        }
+    }
+
+    /// <summary>
     /// Tuple names can now be specified.  Prior to C# 7.0 Tuples existed but their 
     /// members could only be accessed through Item1, Item2, and so on.  Tuple.Create
     /// is no longer needed.
@@ -33,7 +51,7 @@ namespace CSharpLang
         {
             var tuple = new Tuple<int, int>(1, 2);
             // Tuple elments in Sytem.Tuple are accessed through .Item1, .Item2, etc.
-            
+
             Assert.AreNotEqual(tuple.Item1, tuple.Item2);
         }
 
@@ -47,19 +65,58 @@ namespace CSharpLang
             var secondTuple = new Tuple<string, string, string>("A", "B", "C");
 
             Assert.AreEqual(tuple, secondTuple);
+            Assert.AreEqual(tuple.Item1, secondTuple.Item1);
+        }
 
-            Assert.AreEqual(tuple.Item1)
+        /// <summary>
+        /// .NET 4.7 and the out of band System.ValueTuple (via NuGet) added
+        /// a `struct` alternative to the `System.Tuple` class to improve performance.
+        /// </summary>
+        [Test]
+        public void SystemValueTuple()
+        {
+            var valueTuple = new ValueTuple<int, int>(1, 2);
+            Assert.AreEqual(valueTuple.Item1 + 1, valueTuple.Item2);
+        }
+
+        /// <summary>
+        /// Unlike `System.Tuple`, `System.ValueTuple` is immutable.
+        /// </summary>
+        [Test]
+        public void ValueTuplesAreMutable()
+        {
+            var tuple = ValueTuple.Create(1, 2);
+            tuple.Item1 = 2;
+
+            Assert.AreEqual(tuple.Item1, tuple.Item2);
+        }
+
+        /// <summary>
+        /// C# 7.0 added language support for `System.ValueTuple`
+        /// </summary>
+        [Test]
+        public void CSharp7Support()
+        {
+            (int, int) tuple = (1, 2); // Creates a ValueTuple under the hood
+            Assert.AreEqual(tuple.Item1 + 1, tuple.Item2);
+        }
+
+        /// <summary>
+        /// In the C# 7.0 Tuple support, 
+        /// </summary>
+        [Test]
+        public void TupleElementNamesCanBeSpecified()
+        {
+            var tuple = (Sum: 1, Count: 2);
+            Assert.AreEqual(tuple.Sum + 1, tuple.Count);
         }
 
         [Test]
         public void Test()
         {
-            var secondTuple = Tuple.Create(1, 2);
-            int secondTupleValue = secondTuple.Item2 + secondTuple.Item1;
-
             // In C# 7.0 Tuples are now understood in the language:
             var thirdTuple = (1, 2);
-            secondTupleValue = thirdTuple.Item1 + thirdTuple.Item2;
+            //secondTupleValue = thirdTuple.Item1 + thirdTuple.Item2;
 
             // Tuple member names can also be specified
             var fourthTuple = (Alpha: "1", Beta: "2");
