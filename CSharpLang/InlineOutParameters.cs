@@ -3,29 +3,19 @@ using NUnit.Framework;
 
 namespace CSharpLang
 {
-    public class OutParmeterExamples 
-    {
-        // Thought: TryParse is an interesting method because it seems to 
-        // have more than one responsibility: 1) Is the string convertable
-        // 2) Convert the string
-        public void Test(out string x)
-        {
-            x = "";
-        }
-
-        // Question: When are out parameters useful?
-        // Possible Answer: When you are already using the return value and want to 
-        // return more than one value.  The other otpions would be to use a Tuple,
-        // or to return an object, but that could blur the lines.  For instance,
-        // TryParse has one value it returns (whether the string is convertable)
-        // and a separate concept which is the converted value.
-    }
-
     /// <summary>
     /// In C# 7.0 you now can declare a variable for an out parmeter inline
     /// </summary>
     public class InlineOutParameters
     {
+        private OutParmeterExamples _underTest;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _underTest = new OutParmeterExamples();
+        }
+
         /// <summary>
         /// Prior to C# 7, variables for out parameters were declared separately
         /// </summary>
@@ -33,16 +23,12 @@ namespace CSharpLang
         public void PriorOutParameterVariableDeclaration()
         {
             int result; // note: this could be initialized
-            if (int.TryParse("1", out result))
-            {
+            _underTest.MethodWithOutParameter(out result);
 
-            }
+            int anotherResult = 2;
+            _underTest.MethodWithOutParameter(out anotherResult);
 
-            int anotherResult = 0;
-            if (int.TryParse("1", out anotherResult))
-            {
-                
-            }
+            Assert.AreEqual(result, anotherResult);
         }
 
         /// <summary>
@@ -50,23 +36,26 @@ namespace CSharpLang
         /// Their scope leaks to the outer scope.
         /// </summary>
         [Test]
-        public void Can()
+        public void CanDeclareOutParameterVariablesInline()
         {
             // in C# 7.0 the out variable can be declared inline.
-            if (int.TryParse("1", out int theResult))
-            {
+            _underTest.MethodWithOutParameter(out int result);
+            _underTest.MethodWithOutParameter(out int anotherResult);
 
-            }
-            // It's scope is leaked out to the outer scope
-            Console.WriteLine(theResult);
+            Assert.AreEqual(result, anotherResult);
+        }
 
-            // in C# 7.0 you can also declare an implicit (i.e. "var") variable
-            // for an out parameter
-            if (int.TryParse("1", out var aResult))
-            {
+        /// <summary>
+        /// Variable types for out parameters can also be declared
+        /// implicitly
+        /// </summary>
+        [Test]
+        public void CanDeclareOutParameterVariablesImplicityInline()
+        {
+            _underTest.MethodWithOutParameter(out var result);
+            _underTest.MethodWithOutParameter(out var anotherResult);
 
-            }
-            Console.WriteLine(aResult);
+            Assert.AreEqual(result, anotherResult);
         }
     }
 }
