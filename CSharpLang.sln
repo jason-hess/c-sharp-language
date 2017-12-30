@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLang", "CSharpLang\CS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TupleAssembly", "TupleAssembly\TupleAssembly.csproj", "{C24A25C8-E60A-4AD8-B912-ECA25D37D8EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLang71", "CSharpLang71\CSharpLang71.csproj", "{6D390A0B-D2C2-473D-85A4-E972F4EE92B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C24A25C8-E60A-4AD8-B912-ECA25D37D8EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C24A25C8-E60A-4AD8-B912-ECA25D37D8EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C24A25C8-E60A-4AD8-B912-ECA25D37D8EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D390A0B-D2C2-473D-85A4-E972F4EE92B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D390A0B-D2C2-473D-85A4-E972F4EE92B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D390A0B-D2C2-473D-85A4-E972F4EE92B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D390A0B-D2C2-473D-85A4-E972F4EE92B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,7 @@
 ﻿using System;
+using FluentAssertions;
 using NUnit.Framework;
+using TupleAssembly;
 
 namespace CSharpLang
 {
@@ -51,6 +53,30 @@ namespace CSharpLang
         }
 
         /// <summary>
+        /// The usefulness of Tuples is that they can be quickly and briefly
+        /// used to return complex data from a method.
+        /// </summary>
+        [Test]
+        public void TuplesCanBeReturnedFromMethods()
+        {
+            var metrics = SumAndCount(1, 2, 3);
+            var sum = metrics.Item1;
+            var count = metrics.Item2;
+        }
+
+        private static Tuple<int, int> SumAndCount(params int[] ints)
+        {
+            var sum = 0;
+            var count = 0;
+            foreach (var i in ints)
+            {
+                sum += i;
+                count += 1;
+            }
+            return new Tuple<int, int>(sum, count);
+        }
+
+        /// <summary>
         /// .NET 4.7 and the out of band System.ValueTuple (via NuGet) added
         /// a `struct` alternative to the `System.Tuple` class to improve performance.
         /// </summary>
@@ -62,7 +88,7 @@ namespace CSharpLang
         }
 
         /// <summary>
-        /// Unlike `System.Tuple`, `System.ValueTuple` is immutable.
+        /// Unlike `System.Tuple`, `System.ValueTuple` is mutable.
         /// </summary>
         [Test]
         public void ValueTuplesAreMutable()
@@ -84,8 +110,11 @@ namespace CSharpLang
         }
 
         /// <summary>
-        /// In the C# 7.0 Tuple support, 
+        /// In the C# 7.0 Tuple support, Tuple elements can be given names.  These names
+        /// are compiled down to .Item1, .Item2, etc.
         /// </summary>
+        /// <remarks>Under the hood the compiler is adding the TupleElementNamesAttribute
+        /// so that these Tuple names can be used across assemblies.</remarks>
         [Test]
         public void TupleElementNamesCanBeSpecified()
         {
@@ -94,47 +123,49 @@ namespace CSharpLang
         }
 
         [Test]
+        public void CanBeUsedAcrossAssemblies()
+        {
+            var tupleGenerator = new TupleClass();
+            var tuple = tupleGenerator.TupleMethod();
+
+            var tupleElement = tuple.Alpha;
+
+            Assert.AreEqual("1", tuple.Alpha);
+        }
+
+        /// <summary>
+        /// The Tuple elmeent names on the RHS of the assignment are forgotten
+        /// </summary>
+        [Test]
+        public void TupleElementNamesCanBeRespecified()
+        {
+            (string Alpha, string Beta) tuple = (Gamma: "1", Delta: "2");
+
+            tuple.Alpha.Should().Be("1");
+        }
+
+        [Test]
+        public void TuplesCanBeDeconstructedIntoVariables()
+        {
+            // Declare two variables Alpha and Beta from the .Item1 and .Item2 variables of the Tuple:
+            (string alpha, string beta) = ("1", "2");
+
+            alpha.Should().Be("1");
+        }
+
+        [Test]
+        public void TuplesCanBeDeconstructedImplicitly()
+        {
+            // Both declarations achieve the same thing
+            (var theCount, var theSum) = (1,2);
+            var (alpha, beta) = ("1", "2");
+
+            alpha.Should().Be("1");
+        }
+
+        [Test]
         public void Test()
         {
-            // In C# 7.0 Tuples are now understood in the language:
-            var thirdTuple = (1, 2);
-            //secondTupleValue = thirdTuple.Item1 + thirdTuple.Item2;
-
-            // Tuple member names can also be specified
-            var fourthTuple = (Alpha: "1", Beta: "2");
-            var stringValue = $"{fourthTuple.Alpha}{fourthTuple.Beta}";
-            // Note: These names are not preserved at compile time. 
-            //       The complier replaces them with .Item1, .Item2, etc.
-            // Question: Do they work across assmeblies?
-            // Answer: Yes.  Roslyn adds the TupleElementNamesAttribute
-            // so when Visual Studio consumes the assmbly it can assist with
-            // IntelliSense
-            var tupleThing = new TupleAssembly.TupleClass();
-            var alphaValue = tupleThing.TupleMethod().Alpha;
-
-            // Tuple member names can be re-specified
-            (string Alpha, string Beta) fifthTuple = ("1", "2");
-            Console.WriteLine(fifthTuple.Alpha);
-
-            // Methods can specify Tuple member names
-            var sixthTuple = TupleReturningMethod();
-            var member = sixthTuple.Alpha;
-
-            // The following will ignore the Tuple element names on the RHS of the assignment.
-            (string Gamma, string Delta) seventh = (Alpha: "1", Beta: "2");
-
-            // Deconstruction:
-
-            // Tuples can also be deconstructed into variables by not giving a name
-            // to the Tuple:
-            (string Alpha, string Beta) = ("1", "2");
-            // Alpha above is declared in local scope:
-            var alphaCanBeAccessed = Alpha;
-
-            // The second way to deconstruct a Tuple is with this syntax:
-            var (Gamma, Delta) = ("1", "2");
-            var gammaIsNowInLocalScope = Gamma;
-
             // Tuples can also be deconstructed on Classes by providing a `Deconstruct` method.
             // This method name must be `Deconstruct` and provide output parameters and return void.
             var deconstructableThing = new TupleAssembly.TupleClass();
@@ -142,7 +173,11 @@ namespace CSharpLang
             // has two `out` parameters.  
             // Note: You are not bound by the names of the parameters on the Deconstruct method
             var (jack, jones) = deconstructableThing;
+        }
 
+        [Test]
+        public void SystemValueTuplesAreMutable()
+        {
             // Performance:
             // Unlike the original System.Tuple in .NET 4.0 the System.ValueTuple (available via NuGet
             // or .NET 4.7) is a Struct which C# requires for its lanugage support.  All the Tuples
@@ -150,21 +185,7 @@ namespace CSharpLang
             var valueTuple = ValueTuple.Create(1);
             // Note: ValueTuples are mutable whereas `System.Tuple`s were immutable
 
-            // In c# 7.1 you can specify the Tuple element names from the names of the 
-            // variables used to initialise the Tuple:
-            int count = 1;
-            int sum = 2;
-            var theTuple = (count, sum);
-            Assert.AreEqual(count, theTuple.count);
-
-            var stringContent = "The answer to everything";
-            var mixedTuple = (42, stringContent);
-
-            // A name is only projected if it 1) is specified and unique 2) is not "ToString", "ItemX", or "Rest"
-            var ToString = "1";
-            var anotherTuple = (theCount: count, ToString); // Still allowed so that C# 7.0 code will not break, but the second element will be called Item2
-            var firstElement = anotherTuple.theCount;
-            var secondElement = anotherTuple.Item2;
+            
 
             // var yetAnotherTuple = ("1", ToString: "2"); // CS8126  Tuple element name 'ToString' is disallowed at any position.	
 
