@@ -4,25 +4,7 @@ using NUnit.Framework;
 namespace CSharpLang
 {
     /// <summary>
-    /// C# 7.0 adds support for write-only variables that you don't intend to 
-    /// use.
-    /// </summary>
-    public class DiscardBehaviour
-    {
-
-
-        [Test]
-        public void Test()
-        {
-            var tuple = (Year: 1996, Age: 21, Sex: "Male");
-            // Deconstuct the tuple, but don't care about the year:
-            var (_, age, _) = tuple;
-            Assert.AreEqual(tuple.Age, age);
-        }
-    }
-
-    /// <summary>
-    /// Tuple names can now be specified.  Prior to C# 7.0 Tuples existed but their 
+    /// Tuple element names can now be specified.  Prior to C# 7.0 Tuples existed but their 
     /// members could only be accessed through Item1, Item2, and so on.  Tuple.Create
     /// is no longer needed.
     /// 
