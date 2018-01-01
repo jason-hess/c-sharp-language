@@ -15,9 +15,13 @@ namespace CSharpLang71
             var count = 1;
             var sum = 2;
             var tuple = (count, sum);
-            Assert.AreEqual(count, tuple.count);
+            tuple.count.Should().Be(count);
         }
 
+        /// <summary>
+        /// In C# 7.1 Tuple elements will still receive default names (e.g. Item1) 
+        /// if not specified or projected.
+        /// </summary>
         [Test]
         public void TupleElementNamesAreOnlySpecifiedImplicitlyIfSpecified()
         {
@@ -29,7 +33,9 @@ namespace CSharpLang71
         }
 
         /// <summary>
-        /// A name is only projected if it 1) is specified and unique 2) is not "ToString", "ItemX", or "Rest"
+        /// A name is only projected if it 
+        /// 1) is specified and unique 
+        /// 2) is not "ToString", "ItemX", or "Rest" (case sensitive)
         /// </summary>
         [Test]
         public void ATupleElementNameIsProjectedOnlyIfItIsUniqueAndNotReserved()
