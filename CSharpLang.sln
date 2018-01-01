@@ -9,9 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TupleAssembly", "TupleAssem
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpLang71", "CSharpLang71\CSharpLang71.csproj", "{6D390A0B-D2C2-473D-85A4-E972F4EE92B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLang72", "CSharpLang72\CSharpLang72.csproj", "{334197AD-2FB9-4F37-A08D-A9D5E1EB32FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpLang72", "CSharpLang72\CSharpLang72.csproj", "{334197AD-2FB9-4F37-A08D-A9D5E1EB32FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLang70", "CSharpLang70\CSharpLang70.csproj", "{2ED66FD7-4042-4A64-B006-FD153D5A1E6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpLang70", "CSharpLang70\CSharpLang70.csproj", "{2ED66FD7-4042-4A64-B006-FD153D5A1E6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLang60", "CSharpLang60\CSharpLang60.csproj", "{2F10DD67-CA43-4C29-AD55-BE6F6FB2A1CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{2ED66FD7-4042-4A64-B006-FD153D5A1E6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2ED66FD7-4042-4A64-B006-FD153D5A1E6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2ED66FD7-4042-4A64-B006-FD153D5A1E6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F10DD67-CA43-4C29-AD55-BE6F6FB2A1CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F10DD67-CA43-4C29-AD55-BE6F6FB2A1CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F10DD67-CA43-4C29-AD55-BE6F6FB2A1CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F10DD67-CA43-4C29-AD55-BE6F6FB2A1CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
