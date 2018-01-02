@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace CSharpLang60
 {
@@ -11,12 +12,25 @@ namespace CSharpLang60
         [Test]
         public void Should()
         {
-            
+            var toStringValue = "hello";
+            new ExpressionBodiedFunctionMembersExample(toStringValue)
+                .ToString()
+                .Should().Be(toStringValue);
         }
 
+        /// <summary>
+        /// Only functions and read-only auto-properties can be given expression bodied functions
+        /// </summary>
         public class ExpressionBodiedFunctionMembersExample
         {
-            public override string ToString() => $"{base.ToString()}";
+            private readonly string _value;
+
+            public ExpressionBodiedFunctionMembersExample(string value)
+            {
+                _value = value;
+            }
+
+            public override string ToString() => $"{_value}";
             public string ReadOnlyAutoProperty => "Value";
         }
     }
