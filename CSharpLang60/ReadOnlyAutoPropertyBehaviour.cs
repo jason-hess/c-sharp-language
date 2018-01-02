@@ -18,8 +18,8 @@ namespace CSharpLang60
         public class ReadOnlyAutoPropertyExample
         {
             public int AutoProperty { get; set; }
-            public int ReadOnlyAutoProperty { get; }
             public int AutoPropertyWithPrivateSetter { get; private set; }
+            public int ReadOnlyAutoProperty { get; }
 
             public ReadOnlyAutoPropertyExample()
             {

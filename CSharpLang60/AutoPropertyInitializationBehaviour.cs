@@ -3,6 +3,9 @@ using NUnit.Framework;
 
 namespace CSharpLang60
 {
+    /// <summary>
+    /// In C# 6.0 you can now initialise an auto-property inline.
+    /// </summary>
     public class AutoPropertyInitializationBehaviour
     {
         [Test]
@@ -15,27 +18,15 @@ namespace CSharpLang60
 
         public class AutoPropertyInitializationExample
         {
+            /// <summary>
+            /// An example of an read-write auto-property being initialized inline
+            /// </summary>
             public int AutoProperty { get; set; } = 10;
+
+            /// <summary>
+            /// Read-Only auto-properties can also be initialized inline
+            /// </summary>
             public int ReadOnlyAutoProperty { get; } = 10;
-        }
-    }
-
-    /// <summary>
-    /// Functions and Read-Only Auto Properties can now be implemented with an expression
-    /// bodied function.
-    /// </summary>
-    public class ExpressionBodiedFunctionMembers
-    {
-        [Test]
-        public void Should()
-        {
-            
-        }
-
-        public class ExpressionBodiedFunctionMembersExample
-        {
-            public override string ToString() => "Value";
-            public string ReadOnlyAutoProperty => "Value";
         }
     }
 }
