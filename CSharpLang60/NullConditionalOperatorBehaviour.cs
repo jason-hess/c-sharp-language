@@ -5,7 +5,8 @@ namespace CSharpLang60
 {
     /// <summary>
     /// C# 6.0 adds the null conditional operator `?.` which short-circuits and 
-    /// returns null if its LHS argument is null.
+    /// returns null if its LHS argument is null.  The type of the entire expression
+    /// remains as if the operand of ?. was not null.
     /// </summary>
     public class NullConditionalOperatorBehaviour
     {
@@ -18,7 +19,6 @@ namespace CSharpLang60
             underTest?.Length.Should().Be(expectedLength);
         }
 
-
         [Test]
         [TestCase(null, null)]
         [TestCase("bob", 3)]
@@ -26,20 +26,6 @@ namespace CSharpLang60
         {
             // If `underTest` is `null`, then `?.` should short-circuit and return null
             underTest?.Length.GetType().Should().Be(typeof(int));
-        }
-    }
-
-    /// <summary>
-    /// `string`s can now be composed without need for the `+` operator
-    /// </summary>
-    public class StringInterpolationBehaviour
-    {
-        [Test]
-        public void ShouldInterpolate()
-        {
-            int x = 1;
-            int y = 2;
-            $"x: {x} y: {y}".Should().Be("x: 1 y: 2");
         }
     }
 }

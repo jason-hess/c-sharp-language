@@ -11,7 +11,7 @@ namespace CSharpLang60
     /// </summary>
     public class UsingStaticBehaviour
     {
-        // Because of the `using static System.String` above, all `System.String` static method
+        // Because of the `using static System.String` above, all `System.String` static members (and nested types)
         // no longer need to be qualified
         [Test]
         public void StaticMembersNoLongerNeedToBeFullyQualified()
@@ -32,6 +32,10 @@ namespace CSharpLang60
             // CaseInsensitiveEquals("HELLO").Should().BeTrue(); // CS0103  The name 'CaseInsensitiveEquals' does not exist in the current context CSharpLang60   
         }
 
+        /// <summary>
+        /// The `using static CSharpLang60.StringExtensions` statement above imports the 
+        /// `NestedClass` type
+        /// </summary>
         [Test]
         public void UsingStaticImportsNestedTypes()
         {
