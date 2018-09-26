@@ -26,7 +26,7 @@ namespace CSharpLang60
                     erroCount.Should().Be(1);
                 }
             };
-            var stackTrace = x.ShouldThrow<Exception>().And;
+            var stackTrace = x.Should().Throw<Exception>().And;
         }
 
         public void Throws()
