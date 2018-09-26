@@ -8,16 +8,35 @@ namespace CSharpLang60
     /// </summary>
     public class AutoPropertyInitializationBehaviour
     {
-        [Test]
-        public void Should()
+        AutoPropertyInitializationExample _underTest;
+
+        [SetUp]
+        public void SetUp()
         {
-            var underTest = new AutoPropertyInitializationExample();
-            underTest.ReadOnlyAutoProperty.Should().Be(10);
-            underTest.AutoProperty.Should().Be(10);
+            _underTest = new AutoPropertyInitializationExample();
         }
 
+        [Test]
+        public void ReadOnlyAutoPropertyShouldBeTen()
+        {
+            _underTest.ReadOnlyAutoProperty.Should().Be(10);
+        }
+
+        [Test]
+        public void AutoPropertyShouldBeTen()
+        {
+            _underTest.AutoProperty.Should().Be(10);
+        }
         public class AutoPropertyInitializationExample
         {
+            public AutoPropertyInitializationExample() { }
+
+            public AutoPropertyInitializationExample(int defaultValue)
+            {
+                // Read-Only auto-properties can be set inline or from a constructor.
+                ReadOnlyAutoProperty = defaultValue;
+            }
+
             /// <summary>
             /// An example of an read-write auto-property being initialized inline
             /// </summary>
