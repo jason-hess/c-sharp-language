@@ -4,22 +4,41 @@ namespace CSharpLang60
 {
     /// <summary>
     /// C# 6.0 now allows the creation of read-only properties that can only be
-    /// set from within the constructor.
+    /// set from within the constructor or inline.
     /// </summary>
     public class ReadOnlyAutoPropertyBehaviour
     {
+        ReadOnlyAutoPropertyExample _underTest;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _underTest = new ReadOnlyAutoPropertyExample();
+        }
+
         [Test]
         public void Should()
         {
-            var underTest = new ReadOnlyAutoPropertyExample();
-            underTest.ReadOnlyPropertiesCanOnlyBeSetFromConstructor();
+            _underTest.ReadOnlyPropertiesCanOnlyBeSetFromConstructor();
         }
 
         public class ReadOnlyAutoPropertyExample
         {
             public int AutoProperty { get; set; }
+
+            /// <remarks>
+            /// In previous versions of C# you could define a private setter so external code
+            /// could not modify the value.
+            /// </remarks>
             public int AutoPropertyWithPrivateSetter { get; private set; }
+
+            /// <remarks>
+            /// In C# 6 you can now define a read-only property which can only be set inline
+            /// or from the constructor.
+            /// </remarks>
             public int ReadOnlyAutoProperty { get; }
+
+            public int ReadOnlyAutoPropertySetInline { get; } = 10;
 
             public ReadOnlyAutoPropertyExample()
             {
