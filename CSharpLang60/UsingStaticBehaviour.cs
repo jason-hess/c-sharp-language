@@ -7,7 +7,7 @@ namespace CSharpLang60
 {
     /// <summary>
     /// C# 6.0 adds `using static` to import all static members (except Extension Methods)
-    /// and nested types into scope
+    /// and nested types into scope.
     /// </summary>
     public class UsingStaticBehaviour
     {
