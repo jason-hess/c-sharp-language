@@ -3,6 +3,13 @@ using NUnit.Framework;
 
 namespace CSharpLang
 {
+    // ref is like a window onto another window.  ref in is like a window
+    // ref is like a door.
+    // ref readonly
+    // ref in
+    // ref
+    // 
+
     /// <summary>
     /// In C# 7.0 you now can declare a variable for an out parmeter inline
     /// </summary>

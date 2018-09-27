@@ -13,11 +13,42 @@ namespace CSharpLang60
         [Test]
         public void ShouldReturnNonFullyQualifiedNameOfIdentifier()
         {
-            nameof(ShouldReturnNonFullyQualifiedNameOfIdentifier).Should().Be("ShouldReturnNonFullyQualifiedNameOfIdentifier");
-            nameof(NameOfBehaviour).Should().Be("NameOfBehaviour");
             nameof(CSharpLang60.NameOfBehaviour).Should().Be("NameOfBehaviour");
+        }
+
+        [Test]
+        public void ShouldReturnNonFullyQualifiedMethodName()
+        {
+            nameof(ShouldReturnNonFullyQualifiedMethodName).Should().Be("ShouldReturnNonFullyQualifiedMethodName");
+        }
+
+        [Test]
+        public void ShouldReturnNonFullyQualifiedClassName()
+        {
+            nameof(NameOfBehaviour).Should().Be("NameOfBehaviour");
+        }
+
+        [Test]
+        public void ReturnsNonFullyQualifiedAttributeName()
+        {
+            nameof(TestAttribute).Should().Be("TestAttribute");
+        }
+
+        [Test]
+        public void ReturnsNonFullyQualifiedAttributeNameWithoutAttributeSuffix()
+        {
             nameof(Test).Should().Be("Test");
+        }
+
+        [Test]
+        public void ReturnsNonFullyQualifiedNamespaceName()
+        {
             nameof(CSharpLang60).Should().Be("CSharpLang60");
+        }
+
+        [Test]
+        public void ReturnsVariableName()
+        {
             var someVariable = 10;
             nameof(someVariable).Should().Be("someVariable");
         }
