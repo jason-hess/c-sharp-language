@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace CSharpLang60
 {
     /// <summary>
-    /// In C# 6.0 you can now initialise an auto-property inline.
+    /// In C# 6.0 you can initialise an auto-property inline.
     /// </summary>
     public class AutoPropertyInitializationBehaviour
     {

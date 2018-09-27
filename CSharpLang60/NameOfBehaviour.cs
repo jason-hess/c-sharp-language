@@ -15,6 +15,7 @@ namespace CSharpLang60
         {
             nameof(ShouldReturnNonFullyQualifiedNameOfIdentifier).Should().Be("ShouldReturnNonFullyQualifiedNameOfIdentifier");
             nameof(NameOfBehaviour).Should().Be("NameOfBehaviour");
+            nameof(CSharpLang60.NameOfBehaviour).Should().Be("NameOfBehaviour");
             nameof(Test).Should().Be("Test");
             nameof(CSharpLang60).Should().Be("CSharpLang60");
             var someVariable = 10;
