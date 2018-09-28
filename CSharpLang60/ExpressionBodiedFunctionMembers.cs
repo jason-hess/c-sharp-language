@@ -5,17 +5,18 @@ namespace CSharpLang60
 {
     /// <summary>
     /// Functions and Read-Only Auto Properties can now be implemented with an expression
-    /// bodied function.
+    /// bodied function.  This is useful for then you have a function or property that 
+    /// is implemented with a single line of code.
     /// </summary>
     public class ExpressionBodiedFunctionMembers
     {
         [Test]
         public void Should()
         {
-            var toStringValue = "hello";
-            new ExpressionBodiedFunctionMembersExample(toStringValue)
-                .ToString()
-                .Should().Be(toStringValue);
+            var stringValue = "hello";
+            new ExpressionBodiedFunctionMembersExample(stringValue)
+                .MethodImplementedWithExpressionBody()
+                .Should().Be(stringValue);
         }
 
         /// <summary>
@@ -30,8 +31,8 @@ namespace CSharpLang60
                 _value = value;
             }
 
-            public override string ToString() => $"{_value}";
-            public string ReadOnlyAutoProperty => "Value";
+            public string MethodImplementedWithExpressionBody() => $"{_value}";
+            public string ReadOnlyAutoPropertyImplementedWithExpressionBody => "Value";
         }
     }
 }
