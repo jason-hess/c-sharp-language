@@ -7,7 +7,7 @@ namespace CSharpLang60
 {
     /// <summary>
     /// C# 6.0 adds `using static` to import all static members (except Extension Methods)
-    /// and nested types into scope.
+    /// of a single class and its nested types into scope.
     /// </summary>
     public class UsingStaticBehaviour
     {
@@ -34,7 +34,7 @@ namespace CSharpLang60
 
         /// <summary>
         /// The `using static CSharpLang60.StringExtensions` statement above imports the 
-        /// `NestedClass` type
+        /// `NestedClass` type which is a class within the StringExtensions class.
         /// </summary>
         [Test]
         public void UsingStaticImportsNestedTypes()
