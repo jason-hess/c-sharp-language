@@ -1,7 +1,6 @@
-﻿using System.Collections;
+﻿using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
 
 namespace CSharpLang70
 {
@@ -22,7 +21,8 @@ namespace CSharpLang70
             if (o is int x)
             {
                 x++;
-            } else if (o is IEnumerable<int> list)
+            }
+            else if (o is IEnumerable<int> list)
             {
                 list.Count();
             }
@@ -53,7 +53,7 @@ namespace CSharpLang70
         [Test]
         [TestCase(10)]
         [TestCase(new int[0])]
-        [TestCase(new[]{ 1, 2, 3})]
+        [TestCase(new[] { 1, 2, 3 })]
         public void WhenCanAlsoBeUsedInPattenMatching(object o)
         {
             switch (o)
