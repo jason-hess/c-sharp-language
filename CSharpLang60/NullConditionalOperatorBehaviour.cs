@@ -66,12 +66,5 @@ namespace CSharpLang60
             // This is what is preferred in C# 6:
             person?.PerformAction?.Invoke();
         }
-
-        private class Person
-        {
-            public string FirstName { get; set; }
-
-            public Action PerformAction = null;
-        }
     }
 }
