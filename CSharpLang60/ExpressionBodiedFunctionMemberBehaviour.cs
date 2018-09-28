@@ -8,7 +8,7 @@ namespace CSharpLang60
     /// bodied function.  This is useful for then you have a function or property that 
     /// is implemented with a single line of code.
     /// </summary>
-    public class ExpressionBodiedFunctionMembers
+    public class ExpressionBodiedFunctionMemberBehaviour
     {
         [Test]
         public void Should()
