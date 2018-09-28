@@ -114,5 +114,37 @@ namespace CSharpLang60
                 // previously you might have an if statement here to filter and re-throw
             }
         }
+
+        [Test]
+        public void CanInvokeMethodsInExceptionFilters()
+        {
+            try
+            {
+                throw new Exception();
+            }
+            catch (Exception ex) when (ShouldCatchException(ex))
+            {
+
+            }
+            catch (Exception) when (ShouldCatchAllExceptions())
+            {
+                // filters are checked in order
+            }
+            catch(Exception) when (!System.Diagnostics.Debugger.IsAttached)
+            {
+                // do something when not debugging
+            }
+        }
+
+        private bool ShouldCatchException(Exception ex)
+        {
+            // I could log this Exception here
+            return true;
+        }
+
+        private bool ShouldCatchAllExceptions()
+        {
+            return true;
+        }
     }
 }
