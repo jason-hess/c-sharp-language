@@ -19,7 +19,7 @@ namespace CSharpLang60
         [Test]
         public void ReadOnlyAutoPropertyShouldBeTen()
         {
-            _underTest.ReadOnlyAutoProperty.Should().Be(10);
+            _underTest.ReadOnlyAutoProperty.Should().Be(11);
         }
 
         [Test]
@@ -45,7 +45,9 @@ namespace CSharpLang60
             /// <summary>
             /// Read-Only auto-properties can also be initialized inline
             /// </summary>
-            public int ReadOnlyAutoProperty { get; } = 10;
+            public int ReadOnlyAutoProperty { get; } = 11;
+
+            public int AutoPropertyWithPrivateSetterCanSetInline { get; private set; } = 12;
         }
     }
 }
