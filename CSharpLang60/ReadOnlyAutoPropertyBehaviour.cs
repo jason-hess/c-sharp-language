@@ -19,7 +19,7 @@ namespace CSharpLang60
         [Test]
         public void Should()
         {
-            _underTest.ReadOnlyPropertiesCanOnlyBeSetFromConstructor();
+            _underTest.ReadOnlyPropertiesCanOnlyBeSetFromConstructorOrInline();
         }
 
         public class ReadOnlyAutoPropertyExample
@@ -47,7 +47,7 @@ namespace CSharpLang60
                 ReadOnlyAutoProperty = 10;
             }
 
-            public void ReadOnlyPropertiesCanOnlyBeSetFromConstructor()
+            public void ReadOnlyPropertiesCanOnlyBeSetFromConstructorOrInline()
             {
                 AutoPropertyWithPrivateSetter = 11;
                 AutoProperty = 12;
