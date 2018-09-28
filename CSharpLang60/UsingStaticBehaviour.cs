@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using static System.String;
-using static CSharpLang60.StringExtensions;
+using static CSharpLang60.Util.StringExtensions;
 
 namespace CSharpLang60
 {

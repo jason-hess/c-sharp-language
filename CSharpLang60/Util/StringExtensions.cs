@@ -1,4 +1,4 @@
-﻿namespace CSharpLang60
+﻿namespace CSharpLang60.Util
 {
     public static class StringExtensions
     {
@@ -18,7 +18,7 @@
         /// </summary>
         public class NestedClass
         {
-            
+
         }
     }
 }
