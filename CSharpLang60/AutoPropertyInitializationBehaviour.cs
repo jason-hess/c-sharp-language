@@ -19,14 +19,15 @@ namespace CSharpLang60
         [Test]
         public void ReadOnlyAutoPropertyShouldBeTen()
         {
-            _underTest.ReadOnlyAutoProperty.Should().Be(11);
+            _underTest.ReadOnlyAutoPropertySetInline.Should().Be(11);
         }
 
         [Test]
         public void AutoPropertyShouldBeTen()
         {
-            _underTest.AutoProperty.Should().Be(10);
+            _underTest.AutoPropertySetInline.Should().Be(10);
         }
+
         public class AutoPropertyInitializationExample
         {
             public AutoPropertyInitializationExample() { }
@@ -34,20 +35,20 @@ namespace CSharpLang60
             public AutoPropertyInitializationExample(int defaultValue)
             {
                 // Read-Only auto-properties can be set inline or from a constructor.
-                ReadOnlyAutoProperty = defaultValue;
+                ReadOnlyAutoPropertySetInline = defaultValue;
             }
 
             /// <summary>
             /// An example of an read-write auto-property being initialized inline
             /// </summary>
-            public int AutoProperty { get; set; } = 10;
+            public int AutoPropertySetInline { get; set; } = 10;
 
             /// <summary>
             /// Read-Only auto-properties can also be initialized inline
             /// </summary>
-            public int ReadOnlyAutoProperty { get; } = 11;
+            public int ReadOnlyAutoPropertySetInline { get; } = 11;
 
-            public int AutoPropertyWithPrivateSetterCanSetInline { get; private set; } = 12;
+            public int AutoPropertyWithPrivateSetterSetInline { get; private set; } = 12;
         }
     }
 }

@@ -6,9 +6,9 @@ namespace CSharpLang60
 {
     /// <summary>
     /// C# 6.0 adds support for adding filters to `catch` blocks which prevent Exceptions
-    /// from being caught based on their properties.  This preserves Exception details for
-    /// Exceptions that are not caught.  Exception filters are expressions that determine
-    /// when a given catch clause should be applied.
+    /// from being caught based on the result of a boolean expression.  This preserves 
+    /// Exception details for Exceptions that are not caught.  Exception filters are 
+    /// expressions that determine when a given catch clause should be applied.
     /// </summary>
     public class ExceptionFilterBehaviour
     {
@@ -130,7 +130,7 @@ namespace CSharpLang60
             {
                 // filters are checked in order
             }
-            catch(Exception) when (!System.Diagnostics.Debugger.IsAttached)
+            catch (Exception) when (!System.Diagnostics.Debugger.IsAttached)
             {
                 // do something when not debugging
             }
