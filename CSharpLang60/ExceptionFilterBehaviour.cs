@@ -20,7 +20,7 @@ namespace CSharpLang60
             }
             catch (Exception)
             {
-                throw;  // this will modify the stack trace and eliminate line 22
+                throw;  // this will modify the stack trace and eliminate line 19 and add this line instead
             }
         }
 
@@ -77,7 +77,7 @@ namespace CSharpLang60
                    .And
                    .Contain("29")
                    .And
-                   .Contain("70", because: "calling throw; changes moves the throw point for the method that contains it");
+                   .Contain("70", because: "not catching an Exception adds a stack trace the call stack to the Exception");
             }
         }
 
