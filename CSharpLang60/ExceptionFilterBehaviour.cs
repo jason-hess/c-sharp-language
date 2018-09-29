@@ -134,6 +134,12 @@ namespace CSharpLang60
             {
                 // do something when not debugging
             }
+            // Note: `await` is not supported for filters.  The following generates
+            // Error	CS7094	Cannot await in the filter expression of a catch clause
+            //catch (Exception ex) when (await ShouldCatchException(ex))
+            //{
+
+            //}
         }
 
         private bool ShouldCatchException(Exception ex)
