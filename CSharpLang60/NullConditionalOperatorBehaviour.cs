@@ -7,7 +7,7 @@ namespace CSharpLang60
     /// <summary>
     /// C# 6.0 adds the null conditional operator `?.` which short-circuits and 
     /// returns null if its LHS argument is null.  The type of the entire expression
-    /// remains as if the operand of ?. was not null.
+    /// evaluates as if the operand of ?. was not null.
     /// </summary>
     public class NullConditionalOperatorBehaviour
     {

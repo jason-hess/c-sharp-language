@@ -36,8 +36,10 @@ namespace CSharpLang60
         public void MultiLineStringsCanBeCombinedWithInterpolatedStrings()
         {
             var list = new[] { 1, 2, 3 };
+            // The expression is evaluated, but I can also have a newline in the string
             $@"{(from item in list
-                 select item).Sum()}".Should().Be("6");
+                 select item).Sum()}
+".Should().Be("6" + Environment.NewLine);
         }
 
         /// <summary>
