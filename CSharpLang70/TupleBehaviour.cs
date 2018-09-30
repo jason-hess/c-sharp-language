@@ -50,11 +50,12 @@ namespace CSharpLang70
             var tuple = new Tuple<int, int>(1, 2);
             // Tuple elments in Sytem.Tuple are accessed through .Item1, .Item2, etc.
 
-            Assert.AreNotEqual(tuple.Item1, tuple.Item2);
+            tuple.Item1.Should().NotBe(tuple.Item2);
         }
 
         /// <summary>
-        /// Tuples can also be created with Tuple.Create()
+        /// Tuples can also be created with Tuple.Create().  However in C# 7.0 Tuples
+        /// can be created by the compiler.
         /// </summary>
         [Test]
         public void SystemTupleCreate()
