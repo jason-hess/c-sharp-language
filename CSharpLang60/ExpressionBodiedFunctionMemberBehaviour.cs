@@ -10,14 +10,30 @@ namespace CSharpLang60
     /// </summary>
     public class ExpressionBodiedFunctionMemberBehaviour
     {
-        [Test]
-        public void Should()
+        private const string ExpectedValue = "hello";
+        private ExpressionBodiedFunctionMembersExample _underTest;
+
+        [SetUp]
+        public void SetUp()
         {
-            var stringValue = "hello";
-            new ExpressionBodiedFunctionMembersExample(stringValue)
-                .MethodImplementedWithExpressionBody()
-                .Should().Be(stringValue);
+            _underTest = new ExpressionBodiedFunctionMembersExample(ExpectedValue);
         }
+
+        [Test]
+        public void MethodImplementedWithExpressionBodyShouldEvaluateToResultOfBody() =>
+            _underTest
+                .MethodImplementedWithExpressionBody()
+                .Should()
+                .Be(ExpectedValue);
+
+
+
+        [Test]
+        public void PropertyImplementedWithExpressionBodyShouldEvaluateToResultOfBody() =>
+            _underTest
+                .ReadOnlyAutoPropertyImplementedWithExpressionBody
+                .Should()
+                .Be(ExpectedValue);
 
         /// <summary>
         /// Only functions and read-only auto-properties can be given expression bodied functions
@@ -32,7 +48,7 @@ namespace CSharpLang60
             }
 
             public string MethodImplementedWithExpressionBody() => $"{_value}";
-            public string ReadOnlyAutoPropertyImplementedWithExpressionBody => "Value";
+            public string ReadOnlyAutoPropertyImplementedWithExpressionBody => $"{_value}";
         }
     }
 }
