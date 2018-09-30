@@ -3,6 +3,10 @@ using NUnit.Framework;
 
 namespace CSharpLang70
 {
+    /// <summary>
+    /// C# 7.0 improves `out` parameters by allowing you to declare `out` parameters inline
+    /// and to also use implicit types.
+    /// </summary>
     public class OutParameterBehaviour
     {
         [Test]
