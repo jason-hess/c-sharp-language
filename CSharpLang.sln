@@ -13,7 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpLang72", "CSharpLang7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpLang70", "CSharpLang70\CSharpLang70.csproj", "{2ED66FD7-4042-4A64-B006-FD153D5A1E6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLang60", "CSharpLang60\CSharpLang60.csproj", "{2F10DD67-CA43-4C29-AD55-BE6F6FB2A1CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpLang60", "CSharpLang60\CSharpLang60.csproj", "{2F10DD67-CA43-4C29-AD55-BE6F6FB2A1CA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DE453642-B2AF-4F1B-AB63-91156D046EC9}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

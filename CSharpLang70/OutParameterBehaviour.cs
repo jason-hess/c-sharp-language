@@ -20,6 +20,8 @@ namespace CSharpLang70
             // This can now be done inline:
             success = int.TryParse("2", out int inlineOutputParameter);
             inlineOutputParameter.Should().Be(2);
+
+            // Note: The `inlineOutputParameter` leaks to the scope that contains it!
         }
 
         // Thought: TryParse is an interesting method because it seems to 
@@ -36,5 +38,12 @@ namespace CSharpLang70
         // or to return an object, but that could blur the lines.  For instance,
         // TryParse has one value it returns (whether the string is convertable)
         // and a separate concept which is the converted value.
+
+        [Test]
+        public void OutParametersCanBeHaveAnImplicityType()
+        {
+            MethodWithOutParameter(out var param);
+            param.Should().Be(1);
+        }
     }
 }
