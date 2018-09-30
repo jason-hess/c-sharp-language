@@ -51,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DiscardBehaviour.cs" />
-    <Compile Include="TupleBehaviour.cs" />
     <Compile Include="OutParameterBehaviour.cs" />
     <Compile Include="OutParmeterExamples.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

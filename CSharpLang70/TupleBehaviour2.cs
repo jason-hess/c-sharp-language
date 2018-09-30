@@ -23,7 +23,7 @@ namespace CSharpLang
     /// If you want data and behaviour then use a class, otherwise if you want to return
     /// more than one value from a method, you could return a Tuple.
     /// </summary>
-    public class TupleBehaviour
+    public class TupleBehaviour2
     {
         /// <summary>
         /// .NET 4.0 introduced `System.Tuple` which is a `class` that was 
