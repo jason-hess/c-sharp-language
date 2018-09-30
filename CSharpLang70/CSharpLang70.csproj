@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TupleAssembly2\TupleAssembly2.csproj" />
+    <ProjectReference Include="..\TupleAssembly\TupleAssembly.csproj" />
   </ItemGroup>
 
 </Project>
