@@ -24,6 +24,13 @@ namespace CSharpLang60
 
         public class ReadOnlyAutoPropertyExample
         {
+            public ReadOnlyAutoPropertyExample()
+            {
+                AutoProperty = 10;
+                AutoPropertyWithPrivateSetter = 10;
+                ReadOnlyAutoProperty = 10;
+            }
+
             public int AutoProperty { get; set; }
 
             /// <remarks>
@@ -39,13 +46,6 @@ namespace CSharpLang60
             public int ReadOnlyAutoProperty { get; }
 
             public int ReadOnlyAutoPropertySetInline { get; } = 10;
-
-            public ReadOnlyAutoPropertyExample()
-            {
-                AutoProperty = 10;
-                AutoPropertyWithPrivateSetter = 10;
-                ReadOnlyAutoProperty = 10;
-            }
 
             public void ReadOnlyPropertiesCanOnlyBeSetFromConstructorOrInline()
             {

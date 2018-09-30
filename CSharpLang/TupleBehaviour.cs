@@ -1,6 +1,6 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using NUnit.Framework;
+using System;
 using TupleAssembly;
 
 namespace CSharpLang
@@ -157,7 +157,7 @@ namespace CSharpLang
         public void TuplesCanBeDeconstructedImplicitly()
         {
             // Both declarations achieve the same thing
-            (var theCount, var theSum) = (1,2);
+            (var theCount, var theSum) = (1, 2);
             var (alpha, beta) = ("1", "2");
 
             alpha.Should().Be("1");
@@ -185,7 +185,7 @@ namespace CSharpLang
             var valueTuple = ValueTuple.Create(1);
             // Note: ValueTuples are mutable whereas `System.Tuple`s were immutable
 
-            
+
 
             // var yetAnotherTuple = ("1", ToString: "2"); // CS8126  Tuple element name 'ToString' is disallowed at any position.	
 
