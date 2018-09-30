@@ -14,7 +14,7 @@ namespace CSharpLang70
         {
             // In previous versions of C# the caller needed to declare an output
             // variable before passing it to a method.
-            int outputParameter;
+            int outputParameter; // this can optionally be initialized
             bool success = int.TryParse("1", out outputParameter);
 
             // This can now be done inline:
