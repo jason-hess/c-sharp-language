@@ -57,11 +57,5 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TupleAssembly\TupleAssembly.csproj">
-      <Project>{c24a25c8-e60a-4ad8-b912-eca25d37d8ea}</Project>
-      <Name>TupleAssembly</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
