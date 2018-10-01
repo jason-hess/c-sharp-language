@@ -3,7 +3,7 @@
 ## Overview
 
 `c-sharp-language` contains the list of features available in C# spanning versions 6.0 through
-to 7.0.
+to 7.0 based on [What's New in C#](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/)
 
 ## Tooling
 
