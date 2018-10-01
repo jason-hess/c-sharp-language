@@ -6,12 +6,16 @@ namespace CSharpLang70
 {
     /// <summary>
     /// Pattern Matching in C# 7.0 now make it easier to write despatching algorithms.
+    /// This allows you to implement dispatch patterns for types and data elements 
+    /// that are not related through an inheritance hierarchy.
     /// </summary>
     public class PatternMatchingBehaviour
     {
         /// <summary>
         /// C# 7.0 adds support for using `is` and declaring a variable at the same time.
-        /// Previously you would have writting if(value is int) { int x = (int)value; } but
+        /// In previous versions of C# the `is` operator would return true if the operand
+        /// was of the type of the RHS (e.g. x is int returns true if x's Type is an int).
+        /// Before C# 7.0 you would have writting if(value is int) { int x = (int)value; } but
         /// now you can write `if(value is int x) {}`
         /// </summary>
         [Test]
