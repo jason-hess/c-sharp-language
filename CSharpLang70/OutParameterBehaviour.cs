@@ -3,6 +3,13 @@ using NUnit.Framework;
 
 namespace CSharpLang70
 {
+    // ref is like a window onto another window.  ref in is like a window
+    // ref is like a door.
+    // ref readonly
+    // ref in
+    // ref
+    // 
+
     /// <summary>
     /// C# 7.0 improves `out` parameters by allowing you to declare `out` parameters inline
     /// and to also use implicit types.
