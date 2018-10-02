@@ -20,7 +20,10 @@ namespace CSharpLang60
             }
             catch (Exception)
             {
-                throw;  // this will modify the stack trace and eliminate line 19 and add this line instead
+                // as soon as the catch block is entered the stack is unwound which means
+                // that we lose the details of the stack as they were in the ThrowException 
+                // method.
+                throw;  
             }
         }
 
@@ -50,11 +53,11 @@ namespace CSharpLang60
             {
                 ex.StackTrace
                     .Should()
-                    .Contain("34")
+                    .Contain("37")
                     .And
-                    .Contain("23")
+                    .Contain("19")
                     .And
-                    .Contain("47", because: "calling throw; changes moves the throw point for the method that contains it");
+                    .Contain("50", because: "calling throw; changes moves the throw point for the method that contains it");
             }
         }
 
@@ -73,11 +76,11 @@ namespace CSharpLang60
             {
                 ex.StackTrace
                    .Should()
-                   .Contain("34")
+                   .Contain("37")
                    .And
-                   .Contain("29")
+                   .Contain("32")
                    .And
-                   .Contain("70", because: "not catching an Exception adds a stack trace the call stack to the Exception");
+                   .Contain("73", because: "not catching an Exception adds a stack trace the call stack to the Exception");
             }
         }
 

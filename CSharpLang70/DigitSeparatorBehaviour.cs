@@ -16,5 +16,11 @@ namespace CSharpLang70
         {
             value.Should().Be(expectedValue);
         }
+
+        [Test]
+        public void CanBeUsedWithDecimal()
+        {
+            123_456M.Should().Be(123456M);
+        }
     }
 }
