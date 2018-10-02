@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace CSharpLang
+namespace CSharpLang70
 {
     /// <summary>
     /// C# 7.0 adds support for write-only variables called discards that you don't intend to 
@@ -22,13 +22,14 @@ namespace CSharpLang
         [Test]
         public void SupportedWhenCallingMethodsWithOutParameters()
         {
-            int.TryParse("1", out int _);
+            int.TryParse("1", out var _);
+            int.TryParse("1", out _);
         }
 
         [Test]
         public void Supported()
         {
-            int _ = 1 + 2;
+            var _ = 1 + 2;
         }
     }
 }
