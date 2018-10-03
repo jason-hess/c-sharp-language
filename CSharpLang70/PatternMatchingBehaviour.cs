@@ -5,7 +5,7 @@ using System.Linq;
 namespace CSharpLang70
 {
     /// <summary>
-    /// Pattern Matching in C# 7.0 now make it easier to write despatching algorithms.
+    /// Pattern Matching in C# 7.0 now make it easier to write dispatching algorithms.
     /// This allows you to implement dispatch patterns for types and data elements 
     /// that are not related through an inheritance hierarchy.
     /// </summary>
