@@ -41,13 +41,13 @@ namespace CSharpLang70
 
         // Question: When are out parameters useful?
         // Possible Answer: When you are already using the return value and want to 
-        // return more than one value.  The other otpions would be to use a Tuple,
+        // return more than one value.  The other options would be to use a Tuple,
         // or to return an object, but that could blur the lines.  For instance,
-        // TryParse has one value it returns (whether the string is convertable)
+        // TryParse has one value it returns (whether the string is convert-able)
         // and a separate concept which is the converted value.
 
         [Test]
-        public void OutParametersCanBeHaveAnImplicityType()
+        public void OutParametersCanBeHaveAnImplicitType()
         {
             MethodWithOutParameter(out var param);
             param.Should().Be(1);

@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Linq;
+using NUnit.Framework;
 
 namespace CSharpLang70
 {
@@ -6,15 +8,16 @@ namespace CSharpLang70
     /// C# 7.0 adds support for write-only variables called discards that you don't intend to 
     /// use.  Discards are named with the underscore character.  Discards can reduce memory 
     /// allocations and increase the readability of your code.
+    ///
+    /// See: https://docs.microsoft.com/en-us/dotnet/csharp/discards
     /// </summary>
-    /// <see cref="https://docs.microsoft.com/en-us/dotnet/csharp/discards"/>
     public class DiscardBehaviour
     {
         [Test]
         public void SupportedWhenDeconstructingTuples()
         {
             var tuple = (Year: 1996, Age: 21, Sex: "Male");
-            // Deconstuct the tuple, but don't care about the year:
+            // Deconstruct the tuple, but don't care about the year:
             var (_, age, _) = tuple;
             Assert.AreEqual(tuple.Age, age);
         }

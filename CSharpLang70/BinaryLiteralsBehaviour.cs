@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace CSharpLang70
 {
     /// <summary>
-    /// C# 7.0 added support for binary values in your code.  Similar to 0x you can now use 0b to
+    /// C# 7.0 added support for binary literals in your code.  Similar to 0x you can now use 0b to
     /// set binary values.
     /// </summary>
     public class BinaryLiteralsBehaviour
@@ -16,7 +16,9 @@ namespace CSharpLang70
         [TestCase(0b11, 3, TestName = "Literal 0b11 = 3")]
         public void BinaryLiteralsCanBeSpecified(int binaryValue, int expectedValue)
         {
-            binaryValue.Should().Be(expectedValue);
+            binaryValue
+                .Should()
+                .Be(expectedValue);
         }
     }
 }

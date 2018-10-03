@@ -11,6 +11,7 @@ namespace CSharpLang70
         [Test]
         [TestCase(0b1010_1010, 0b10101010, TestName = "Literal 0b1010_1010 = 0b10101010")]
         [TestCase(10_000_000, 10000000, TestName = "Literal 10_000_000 = 10000000")]
+        [TestCase(0x10_10, 0x1010, TestName = "Literal 0x10_10 = 0x1010")]
         [TestCase(10.000_000_000, 10.000000000, TestName = "Literal 10.000_000_000 = 10.000000000")]
         public void Should(object value, object expectedValue)
         {
