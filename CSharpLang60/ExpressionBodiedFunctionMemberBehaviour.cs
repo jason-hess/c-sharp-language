@@ -26,8 +26,6 @@ namespace CSharpLang60
                 .Should()
                 .Be(ExpectedValue);
 
-
-
         [Test]
         public void PropertyImplementedWithExpressionBodyShouldEvaluateToResultOfBody() =>
             _underTest

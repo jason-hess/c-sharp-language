@@ -49,6 +49,11 @@ namespace CSharpLang60
             public int ReadOnlyAutoPropertySetInline { get; } = 11;
 
             public int AutoPropertyWithPrivateSetterSetInline { get; private set; } = 12;
+
+            public void SetValue(int value)
+            {
+                AutoPropertyWithPrivateSetterSetInline = value;
+            }
         }
     }
 }
