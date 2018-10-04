@@ -13,12 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpLang60", "CSharpLang6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DE453642-B2AF-4F1B-AB63-91156D046EC9}"
 	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TupleAssembly", "TupleAssembly\TupleAssembly.csproj", "{08B2BCC2-075A-43D8-A8EB-4385A18A44E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{B0DBBA28-A4E6-4E1A-BDD3-862FBF75A05F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{B0DBBA28-A4E6-4E1A-BDD3-862FBF75A05F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
