@@ -14,8 +14,8 @@ namespace CSharpLang60
         [Test]
         public void ShouldInterpolate()
         {
-            int x = 1;
-            int y = 2;
+            var x = 1;
+            var y = 2;
             $"x: {x} y: {y}".Should().Be("x: 1 y: 2");
         }
 
@@ -67,7 +67,7 @@ namespace CSharpLang60
         /// than the one that hte code is executing on
         /// </summary>
         [Test]
-        public void CultureSpecificFormatingCanBeDone()
+        public void CultureSpecificFormattingCanBeDone()
         {
             FormattableString theString = $"{2:C}";
             theString.ToString(CultureInfo.GetCultureInfo("de-de")).Should().Be("2,00 €");

@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using System;
+using CSharpLang60.Util;
 
 namespace CSharpLang60
 {
@@ -63,7 +64,8 @@ namespace CSharpLang60
                 }
             }
 
-            // This is what is preferred in C# 6:
+            // This is what is preferred in C# 6.  Note that any race conditions in the above
+            // conditional is eliminated.
             person?.PerformAction?.Invoke();
         }
     }
