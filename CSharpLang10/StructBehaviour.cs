@@ -23,6 +23,18 @@ namespace CSharpLang10
             r2.Length = 1;
             r2.Length.Should().Be(1);
         }
+
+        [Test]
+        public void StructsAreAlwaysCopied()
+        {
+            Rectangle r = new Rectangle();
+            r.Length = 10;
+            Rectangle r2 = r;
+            r2.Length.Should().Be(10);
+            r2.Length = 9;
+            r2.Length.Should().Be(9);
+            r.Length.Should().Be(10);
+        }
     }
 
     public struct Rectangle
