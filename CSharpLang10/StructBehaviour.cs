@@ -27,7 +27,7 @@ namespace CSharpLang10
 
     public struct Rectangle
     {
-        // structs cannot have a default constructor
+        // structs cannot have a default constructor or a finalizer
         public int Width;
         public int Length;
     }
