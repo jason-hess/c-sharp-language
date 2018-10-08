@@ -1,5 +1,10 @@
 ﻿namespace CSharpLang60.Util
 {
+    public struct Rectangle
+    {
+        public int Length;
+    }
+
     public static class StringExtensions
     {
         /// <summary>
