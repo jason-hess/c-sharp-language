@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace CSharpLang10
@@ -11,15 +12,22 @@ namespace CSharpLang10
     public class StructBehaviour
     {
         [Test]
-        public void Test()
+        public void FieldsOfStructsAreInitializedToDefaultValuesWhenNewIsNotCalled()
         {
-            Rectangle r;
+            Rectangle r = new Rectangle(); // initializes all members to default.  This must be called before you access
+            // if you don't initialize a member
 
+            r.Length.Should().Be(0);
+
+            Rectangle r2;
+            r2.Length = 1;
+            r2.Length.Should().Be(1);
         }
     }
 
     public struct Rectangle
     {
+        // structs cannot have a default constructor
         public int Width;
         public int Length;
     }
