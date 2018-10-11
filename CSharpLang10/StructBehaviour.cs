@@ -9,10 +9,24 @@ namespace CSharpLang10
     /// it is copied. The new variable and the original variable therefore contain two separate
     /// copies of the same data. Changes made to one copy do not affect the other copy.
     ///
+    /// Structs are best suited to small structures that contain primarily data that is not
+    /// modified after the struct is created.
+    ///
     /// See: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/structs
+    /// See: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/index
     /// </summary>
     public class StructBehaviour
     {
+        [Test]
+        public void StructsCanBeCreatedWithoutNewButFieldsMustFirstBeInitialized()
+        {
+            Rectangle r; // this variable contains the value
+
+            // r.Length.Should().Be(10); // CS0170 - Use of possibly unassign field 'Length'
+            r.Width = 10;
+            r.Width.Should().Be(10);
+        }
+
         [Test]
         public void FieldsOfStructsAreInitializedToDefaultValuesWhenDefaultNewIsCalled()
         {
