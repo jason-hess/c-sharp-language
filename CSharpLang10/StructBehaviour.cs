@@ -62,8 +62,13 @@ namespace CSharpLang10
         }
     }
 
+    public interface Polygon
+    {
+
+    }
+
     // structs cannot inherit from another struct or class and cannot be inherited from
-    public struct Rectangle
+    public struct Rectangle : Polygon  // structs can implement interfaces!
     {
         // public Rectangle() { } // CS0568 structs cannot contain explicit parameterless constructors
 
