@@ -71,5 +71,9 @@ namespace CSharpLang10
         // structs cannot have a default constructor or a finalizer
         public int Width;
         public int Length;
+
+        // Within a `struct` definition, fields cannot be initialized unless they are static or const
+        // public int Area = 10; // CS0573 non static struct member cannot have an initializer
+
     }
 }
