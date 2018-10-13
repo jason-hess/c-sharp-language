@@ -31,6 +31,7 @@ namespace CSharpLang10
         [Test]
         public void FieldsOfStructsAreInitializedToDefaultValuesWhenDefaultNewIsCalled()
         {
+            // Structs have an implicit default constructor which assign all members to default values.
             Rectangle r = new Rectangle(); // initializes all members to default.  This must be called before you access
             // if you don't initialize a member
 
@@ -61,6 +62,7 @@ namespace CSharpLang10
         }
     }
 
+    // structs cannot inherit from another struct or class and cannot be inherited from
     public struct Rectangle
     {
         // public Rectangle() { } // CS0568 structs cannot contain explicit parameterless constructors
@@ -69,14 +71,23 @@ namespace CSharpLang10
         {
             Width = width;
             Length = length;
+            Colour = new Colour();
         }
 
         // structs cannot have a default constructor or a finalizer
         public int Width;
         public int Length;
 
+        // Structs can contain references to reference types
+        public Colour Colour;
+
         // Within a `struct` definition, fields cannot be initialized unless they are static or const
         // public int Area = 10; // CS0573 non static struct member cannot have an initializer
+
+    }
+
+    public class Colour
+    {
 
     }
 }
