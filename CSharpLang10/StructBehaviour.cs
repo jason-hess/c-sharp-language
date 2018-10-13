@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -60,6 +61,12 @@ namespace CSharpLang10
             Rectangle r = new Rectangle(10, 12);
             r.Width.Should().Be(10);
         }
+
+        [Test]
+        public void StructsCanBeNullable()
+        {
+            // Nullable<Rectangle> r = null;  Generics are implemented in C# 2
+        }
     }
 
     public interface Polygon
@@ -67,6 +74,7 @@ namespace CSharpLang10
 
     }
 
+    // All structs inherit from `ValueType` which inherits from `Object`
     // structs cannot inherit from another struct or class and cannot be inherited from
     public struct Rectangle : Polygon  // structs can implement interfaces!
     {
