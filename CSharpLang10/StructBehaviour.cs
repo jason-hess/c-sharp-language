@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Diagnostics;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace CSharpLang10
@@ -62,6 +63,8 @@ namespace CSharpLang10
 
     public struct Rectangle
     {
+        // public Rectangle() { } // CS0568 structs cannot contain explicit parameterless constructors
+
         public Rectangle(int width, int length)
         {
             Width = width;
