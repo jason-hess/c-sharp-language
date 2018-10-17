@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using FluentAssertions;
+﻿using FluentAssertions;
 using NUnit.Framework;
 
 namespace CSharpLang10
