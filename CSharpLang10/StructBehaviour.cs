@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace CSharpLang10
@@ -68,6 +69,11 @@ namespace CSharpLang10
     }
 
     public interface Polygon
+    {
+
+    }
+
+    public struct Rect : ValueType
     {
 
     }
