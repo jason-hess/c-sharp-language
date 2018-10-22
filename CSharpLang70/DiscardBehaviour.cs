@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace CSharpLang70
 {
@@ -25,6 +23,7 @@ namespace CSharpLang70
         [Test]
         public void SupportedWhenCallingMethodsWithOutParameters()
         {
+            int.TryParse("1", out int _);
             int.TryParse("1", out var _);
             int.TryParse("1", out _);
         }

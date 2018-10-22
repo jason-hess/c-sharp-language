@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSharpLang60
+namespace CSharpLang60.Util
 {
     public class Person
     {

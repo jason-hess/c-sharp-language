@@ -27,12 +27,12 @@ namespace CSharpLang60
             }
         }
 
-        private void NotCatchException()
+        private static void NotCatchException()
         {
             ThrowException();
         }
 
-        private void ThrowException()
+        private static void ThrowException()
         {
             throw new Exception("exception message");
         }

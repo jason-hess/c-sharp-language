@@ -6,7 +6,7 @@ namespace CSharpLang60
 {
     /// <summary>
     /// In C# 6.0 await is now supported in catch and finally blocks.  The benefit of this
-    /// is that if the catch or finally block throws an exception in asyncronous code
+    /// is that if the catch or finally block throws an exception in asynchronous code
     /// the same behaviour will occur as if it was synchronous code - the surrounding code
     /// is searched for a catch block.
     /// </summary>
@@ -30,12 +30,12 @@ namespace CSharpLang60
             }
         }
 
-        private async Task DoSomethingAsync()
+        private static async Task DoSomethingAsync()
         {
             await Task.CompletedTask;
         }
 
-        private async Task Trace(string message)
+        private static async Task Trace(string message)
         {
             await Task.CompletedTask;
         }
