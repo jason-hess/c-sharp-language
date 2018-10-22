@@ -73,11 +73,6 @@ namespace CSharpLang10
 
     }
 
-    public struct Rect : ValueType
-    {
-
-    }
-
     // All structs inherit from `ValueType` which inherits from `Object`
     // structs cannot inherit from another struct or class and cannot be inherited from
     public struct Rectangle : Polygon  // structs can implement interfaces!
