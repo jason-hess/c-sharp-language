@@ -6,7 +6,7 @@ namespace CSharpLang71
     public class TupleBehaviour
     {
         /// <summary>
-        /// In C# 7.1 you can specify Tuple elemnet names from the names of the variables
+        /// In C# 7.1 you can specify Tuple element names from the names of the variables
         /// used to initialise the Tuple.
         /// </summary>
         [Test]
