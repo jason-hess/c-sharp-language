@@ -1,4 +1,4 @@
-﻿namespace CSharpLang2
+﻿namespace CSharpLang20
 {
     /// <summary>
     /// C# 2.0 added support for partial classes.  During complication the two definitions

@@ -1,4 +1,4 @@
-﻿namespace CSharpLang2
+﻿namespace CSharpLang20
 {
     /// <summary>
     /// Prior to C# 2.0 all the get and set portions of the property each had the same

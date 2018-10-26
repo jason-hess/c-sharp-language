@@ -1,4 +1,4 @@
-﻿namespace CSharpLang2
+﻿namespace CSharpLang20
 {
     /// <summary>
     /// Prior to C# 2.0 it was impossible to create a class without an instance constructor.

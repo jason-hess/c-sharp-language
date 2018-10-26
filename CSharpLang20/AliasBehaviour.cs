@@ -1,6 +1,6 @@
 ﻿using x = System;
 
-namespace CSharpLang2
+namespace CSharpLang20
 {
     class AliasBehaviour
     {
