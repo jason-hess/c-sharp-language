@@ -6,9 +6,14 @@
     /// </summary>
     public class StaticClassBehaviour
     {
+
+
         public static class StaticClass
         {
+            static StaticClass()
+            {
 
+            }
         }
     }
 }
