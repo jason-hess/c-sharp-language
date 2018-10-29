@@ -6,6 +6,8 @@ namespace CSharpLang20
     /// C# 2.0 introduced the System.Nullable which was a generic type that had
     /// operators overloaded.  The values of the type can be any value of the type
     /// plus <code>null</code>.  The value for &lt;T%gt; can be any value type.
+    ///
+    /// See: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/nullable-types/
     /// </summary>
     public class NullableTypeBehaviour
     {
