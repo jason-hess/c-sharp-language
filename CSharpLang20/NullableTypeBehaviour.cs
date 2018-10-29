@@ -18,5 +18,12 @@ namespace CSharpLang20
                 int value = nullableValue.Value;
             }
         }
+
+        [Test]
+        public void NullableIsStruct()
+        {
+            int? x = 10;
+            System.ValueType y = x;
+        }
     }
 }
