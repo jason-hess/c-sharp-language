@@ -4,7 +4,8 @@ namespace CSharpLang20
 {
     /// <summary>
     /// C# 2.0 introduced the System.Nullable which was a generic type that had
-    /// operators overloaded.
+    /// operators overloaded.  The values of the type can be any value of the type
+    /// plus <code>null</code>.  The value for &lt;T%gt; can be any value type.
     /// </summary>
     public class NullableTypeBehaviour
     {
