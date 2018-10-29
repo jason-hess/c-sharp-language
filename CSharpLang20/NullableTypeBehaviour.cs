@@ -11,7 +11,12 @@ namespace CSharpLang20
         [Test]
         public void Could()
         {
-
+            System.Nullable<int> nullableValue = null;
+            nullableValue = 10;
+            if (nullableValue.HasValue)
+            {
+                int value = nullableValue.Value;
+            }
         }
     }
 }
