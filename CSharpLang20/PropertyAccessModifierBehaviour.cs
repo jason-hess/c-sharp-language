@@ -19,11 +19,4 @@
             }
         }
     }
-    /// <summary>
-    /// http://www.yoda.arachsys.com/csharp/csharp2/delegates.html
-    /// </summary> 
-    public class GenericsBehaviour
-    {
-
-    }
 }
