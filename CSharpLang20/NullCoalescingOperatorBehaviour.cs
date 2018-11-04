@@ -14,7 +14,9 @@ namespace CSharpLang20
         {
             int? leftHandValue = 10;
             int finalValue = leftHandValue ?? 11;
+            finalValue.Should().Be(10);
         }
+
         [Test]
         public void LeftHandOperandMustBeNullable()
         {
@@ -25,14 +27,7 @@ namespace CSharpLang20
         }
 
         [Test]
-        public void Should()
-        {
-            string value = null;
-            AssertionExtensions.Should(value ?? "").Be("");
-        }
-
-        [Test]
-        public void TheOperandsMustBeSubsetsOfTheNullableType()
+        public void TheOperandsMustBeSubsetsOfTheSameNullableType()
         {
             // the result of the operation is a non-nullable type
             int? x = 10;

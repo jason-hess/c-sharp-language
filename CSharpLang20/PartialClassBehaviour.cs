@@ -1,4 +1,7 @@
-﻿namespace CSharpLang20
+﻿using FluentAssertions;
+using NUnit.Framework;
+
+namespace CSharpLang20
 {
     /// <summary>
     /// C# 2.0 added support for partial classes.  During complication the two definitions
@@ -7,17 +10,28 @@
     /// </summary>
     public partial class PartialClassBehaviour
     {
-        public string Description
+        public partial class ThePartialClass
         {
-            get { return "PartialClassBehaviour"; }
+            public string Description
+            {
+                get { return "PartialClassBehaviour"; }
+            }
         }
-    }
 
-    public partial class PartialClassBehaviour
-    {
-        public int Length
+        public partial class ThePartialClass
         {
-            get { return Description.Length; }
+            public int Length
+            {
+                get { return Description.Length; }
+            }
+        }
+
+        [Test]
+        public void CompilerShouldCombineDefinition()
+        {
+            ThePartialClass underTest = new ThePartialClass();
+            underTest.Description.Should().Be("PartialClassBehaviour");
+            underTest.Length.Should().BeGreaterThan(0);
         }
     }
 }
