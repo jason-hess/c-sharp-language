@@ -6,13 +6,12 @@
     /// </summary>
     public class StaticClassBehaviour
     {
-
-
         public static class StaticClass
         {
             static StaticClass()
             {
-
+                // the class can still have a constructor which is called 
+                // when the class is first referred to
             }
         }
     }
