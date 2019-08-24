@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
 
 namespace CSharpLang73
 {
@@ -11,7 +12,12 @@ namespace CSharpLang73
         /// <typeparam name="T"></typeparam>
         public class EnumGenericTypeConstraint<T> where T : System.Enum
         {
+            private readonly T _value;
 
+            public EnumGenericTypeConstraint(T value)
+            {
+                _value = value;
+            }
         }
 
         enum Flag
