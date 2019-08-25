@@ -43,7 +43,24 @@ namespace CSharpLang73
             // var intType = new EnumGenericTypeConstraint<int>(); // Error CS0315  The type 'int' cannot be used as type parameter 'T' in the generic type or method 'GenericsBehaviour73.EnumGenericTypeConstraint<T>'.There is no boxing conversion from 'int' to 'System.Enum'
             flagType.NotValues
                 .Should()
-                .BeEquivalentTo(new[] {Flag.Canadian});
+                .BeEquivalentTo(new[] { Flag.Canadian });
+        }
+
+        /// <summary>
+        /// Beginning with C# 7.3, you can use the unmanaged constraint to specify that a
+        /// type parameter is a non-pointer unmanaged type.
+        /// </summary>
+        public class UnmanagedTypeConstraint
+        {
+            public static string TypeName<T>(T value) where T : unmanaged => 
+                typeof(T).FullName;
+
+            [Test]
+            public void CanConstrainGenericTypeToUnmanagedType()
+            {
+                short p = 0;
+                var genericInstance = TypeName(p);
+            }
         }
     }
 }

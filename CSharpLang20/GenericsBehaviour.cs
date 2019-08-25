@@ -46,56 +46,56 @@ namespace CSharpLang20
             container.Value.Should().Be(10);
         }
 
-// Constraints inform the compiler about the capabilities a type argument must have.
-// Without any constraints, the type argument could be any type. The compiler can
-// only assume the members of System.Object, which is the ultimate base class
-// for any .NET type.
+        // Constraints inform the compiler about the capabilities a type argument must have.
+        // Without any constraints, the type argument could be any type. The compiler can
+        // only assume the members of System.Object, which is the ultimate base class
+        // for any .NET type.
 
-// By constraining the type parameter, you increase the number of allowable operations and method calls to those supported by the constraining type
+        // By constraining the type parameter, you increase the number of allowable operations and method calls to those supported by the constraining type
 
-// Multiple constraints can be applied to the same type parameter, and the constraints themselves can be generic types
+        // Multiple constraints can be applied to the same type parameter, and the constraints themselves can be generic types
 
-// class EmployeeList<T> where T : Employee, IEmployee, System.IComparable<T>, new()
-// {
+        // class EmployeeList<T> where T : Employee, IEmployee, System.IComparable<T>, new()
+        // {
 
-// Generic Type constraints:
-// where T : struct
-// where T : class
-// where T : unmanaged
-// where T : new()
-// where T : BaseClass
-// where T : Interface
-// where TOne : TTwo
+        // Generic Type constraints:
+        // where T : struct
+        // where T : class
+        // where T : unmanaged
+        // where T : new()
+        // where T : BaseClass
+        // where T : Interface
+        // where TOne : TTwo
 
-/*
- * When applying the where T : class constraint, avoid the == and != operators on the type parameter because these operators will test for reference identity only, not for value equality. This behavior occurs even if these operators are overloaded in a type that is used as an argument. The following code illustrates this point; the output is false even though the String class overloads the == operator.
+        /*
+         * When applying the where T : class constraint, avoid the == and != operators on the type parameter because these operators will test for reference identity only, not for value equality. This behavior occurs even if these operators are overloaded in a type that is used as an argument. The following code illustrates this point; the output is false even though the String class overloads the == operator.
 
-C#
+        C#
 
-Copy
-public static void OpEqualsTest<T>(T s, T t) where T : class
-{
-System.Console.WriteLine(s == t);
-}
-private static void TestStringEquality()
-{
-string s1 = "target";
-System.Text.StringBuilder sb = new System.Text.StringBuilder("target");
-string s2 = sb.ToString();
-OpEqualsTest<string>(s1, s2);
-}
-*/
+        Copy
+        public static void OpEqualsTest<T>(T s, T t) where T : class
+        {
+        System.Console.WriteLine(s == t);
+        }
+        private static void TestStringEquality()
+        {
+        string s1 = "target";
+        System.Text.StringBuilder sb = new System.Text.StringBuilder("target");
+        string s2 = sb.ToString();
+        OpEqualsTest<string>(s1, s2);
+        }
+        */
 
-/**
- * Type parameters that have no constraints, such as T in public class SampleClass<T>{}, are called unbounded type parameters. Unbounded type parameters have the following rules:
+        /**
+         * Type parameters that have no constraints, such as T in public class SampleClass<T>{}, are called unbounded type parameters. Unbounded type parameters have the following rules:
 
 The != and == operators cannot be used because there is no guarantee that the concrete type argument will support these operators.
 They can be converted to and from System.Object or explicitly converted to any interface type.
 You can compare them to null. If an unbounded parameter is compared to null, the comparison will always return false if the type argument is a value type.
- */
+         */
 
-/**
- * Type parameters as constraints
+        /**
+         * Type parameters as constraints
 The use of a generic type parameter as a constraint is useful when a member function with its own type parameter has to constrain that parameter to the type parameter of the containing type, as shown in the following example:
 
 C#
@@ -115,36 +115,44 @@ C#
 Copy
 //Type parameter V is used as a type constraint.
 public class SampleClass<T, U, V> where T : V { }
- */
+         */
 
-/* Beginning with C# 7.3, you can use the unmanaged constraint to specify that the type parameter must be an unmanaged type.  */
+        /* Beginning with C# 7.3, you can use the unmanaged constraint to specify that the type parameter must be an unmanaged type.
 
-/* Also beginning with C# 7.3, you can use System.Delegate or System.MulticastDelegate as a base class constraint. The CLR always allowed this constraint, but the C# language disallowed it. The System.Delegate constraint enables you to write code that works with delegates in a type-safe manner. The following code defines an extension method that combines two delegates provided they are the same type:
+                 An unmanaged type is any type that isn't a reference type or constructed type (a type that includes at least one type argument), and doesn't contain reference type or constructed type fields at any level of nesting. In other words, an unmanaged type is one of the following:
 
-        C#
+        sbyte, byte, short, ushort, int, uint, long, ulong, char, float, double, decimal, or bool
+        Any enum type
+        Any pointer type
+        Any user-defined struct type that is not a constructed type and contains fields of unmanaged types only
+        */
 
-            Copy
-        public static TDelegate TypeSafeCombine<TDelegate>(this TDelegate source, TDelegate target)
-            where TDelegate : System.Delegate
-            => Delegate.Combine(source, target) as TDelegate;
-        You can use the above method to combine delegates that are the same type:
+        /* Also beginning with C# 7.3, you can use System.Delegate or System.MulticastDelegate as a base class constraint. The CLR always allowed this constraint, but the C# language disallowed it. The System.Delegate constraint enables you to write code that works with delegates in a type-safe manner. The following code defines an extension method that combines two delegates provided they are the same type:
 
-        C#
+                C#
 
-            Copy
-        Action first = () => Console.WriteLine("this");
-        Action second = () => Console.WriteLine("that");
+                    Copy
+                public static TDelegate TypeSafeCombine<TDelegate>(this TDelegate source, TDelegate target)
+                    where TDelegate : System.Delegate
+                    => Delegate.Combine(source, target) as TDelegate;
+                You can use the above method to combine delegates that are the same type:
 
-        var combined = first.TypeSafeCombine(second);
-        combined();
+                C#
 
-        Func<bool> test = () => true;
-        // Combine signature ensures combined delegates must
-        // have the same type.
-        //var badCombined = first.TypeSafeCombine(test); */
+                    Copy
+                Action first = () => Console.WriteLine("this");
+                Action second = () => Console.WriteLine("that");
 
-/* Beginning in C# 7.3, you can also specify the System.Enum type as a base class constraint. The CLR always allowed this constraint, but the C# language disallowed it.
- */
+                var combined = first.TypeSafeCombine(second);
+                combined();
+
+                Func<bool> test = () => true;
+                // Combine signature ensures combined delegates must
+                // have the same type.
+                //var badCombined = first.TypeSafeCombine(test); */
+
+        /* Beginning in C# 7.3, you can also specify the System.Enum type as a base class constraint. The CLR always allowed this constraint, but the C# language disallowed it.
+         */
     }
 }
  
