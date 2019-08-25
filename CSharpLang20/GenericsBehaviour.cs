@@ -52,6 +52,41 @@ namespace CSharpLang20
         // only assume the members of System.Object, which is the ultimate base class
         // for any .NET type.
 
+        public class GenericTypeConstraints
+        {
+
+            public class CanBeStructConstraint<T> where T : struct { } // must be a value type excluding Nullable<T>
+
+            public static void MustBeReferenceTypeConstraint<T>(T value) where T: class { } // must be a reference type (interface, delegate or array)
+
+            public static T MustHaveDefaultConstructor<T>() where T : new()
+            {
+                return new T();
+            }
+
+            public static void MustBeOrInheritFrom<T>() where T : CanBeStructConstraint<int>
+            {
+
+            }
+
+            public static void MustImplementInterface<T, TU>() where T : IEquatable<TU>
+            {
+
+            }
+
+            public static void CanReferToOtherTypeConstraintClasses<TParent, TChild>() where TChild : TParent
+            {
+
+            }
+
+            [Test]
+            public void CanPassDelegateToReferenceTypeConstrainedGeneric()
+            {
+                Action doSomthing = CanPassDelegateToReferenceTypeConstrainedGeneric;
+                MustBeReferenceTypeConstraint(doSomthing);
+            }
+        }
+
         // By constraining the type parameter, you increase the number of allowable operations and method calls to those supported by the constraining type
 
         // Multiple constraints can be applied to the same type parameter, and the constraints themselves can be generic types
@@ -118,27 +153,6 @@ Copy
 public class SampleClass<T, U, V> where T : V { }
          */
 
-        /* Also beginning with C# 7.3, you can use System.Delegate or System.MulticastDelegate as a base class constraint. The CLR always allowed this constraint, but the C# language disallowed it. The System.Delegate constraint enables you to write code that works with delegates in a type-safe manner. The following code defines an extension method that combines two delegates provided they are the same type:
-
-                C#
-
-                    Copy
-                public static TDelegate TypeSafeCombine<TDelegate>(this TDelegate source, TDelegate target)
-                    where TDelegate : System.Delegate
-                    => Delegate.Combine(source, target) as TDelegate;
-                You can use the above method to combine delegates that are the same type:
-
-                C#
-
-                    Copy
-                Action first = () => Console.WriteLine("this");
-                Action second = () => Console.WriteLine("that");
-
-                var combined = first.TypeSafeCombine(second);
-                combined();
-
-                Func<bool> test = () => true;
-                // Combine signature ensures combined delegates must
                 // have the same type.
                 //var badCombined = first.TypeSafeCombine(test); */
 
