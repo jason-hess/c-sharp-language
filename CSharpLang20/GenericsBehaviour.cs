@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace CSharpLang20
@@ -117,16 +118,6 @@ Copy
 public class SampleClass<T, U, V> where T : V { }
          */
 
-        /* Beginning with C# 7.3, you can use the unmanaged constraint to specify that the type parameter must be an unmanaged type.
-
-                 An unmanaged type is any type that isn't a reference type or constructed type (a type that includes at least one type argument), and doesn't contain reference type or constructed type fields at any level of nesting. In other words, an unmanaged type is one of the following:
-
-        sbyte, byte, short, ushort, int, uint, long, ulong, char, float, double, decimal, or bool
-        Any enum type
-        Any pointer type
-        Any user-defined struct type that is not a constructed type and contains fields of unmanaged types only
-        */
-
         /* Also beginning with C# 7.3, you can use System.Delegate or System.MulticastDelegate as a base class constraint. The CLR always allowed this constraint, but the C# language disallowed it. The System.Delegate constraint enables you to write code that works with delegates in a type-safe manner. The following code defines an extension method that combines two delegates provided they are the same type:
 
                 C#
@@ -151,8 +142,6 @@ public class SampleClass<T, U, V> where T : V { }
                 // have the same type.
                 //var badCombined = first.TypeSafeCombine(test); */
 
-        /* Beginning in C# 7.3, you can also specify the System.Enum type as a base class constraint. The CLR always allowed this constraint, but the C# language disallowed it.
-         */
     }
 }
  
