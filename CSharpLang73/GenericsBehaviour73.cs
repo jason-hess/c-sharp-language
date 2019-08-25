@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace CSharpLang73
@@ -18,18 +21,29 @@ namespace CSharpLang73
             {
                 _value = value;
             }
+
+            public IEnumerable<T> NotValues =>
+                typeof(T)
+                    .GetEnumValues() // Note: Roslyn understands that T has GetEnumValues()
+                    .Cast<T>()
+                    .Where(enumValue => !enumValue.Equals(_value));
         }
 
-        enum Flag
+        public enum Flag
         {
             Australian,
             Canadian
         }
 
+        [Test]
         public void CanAddEnumAsTypeConstraint()
         {
-            var flagType = new EnumGenericTypeConstraint<Flag>();
+            var flagType = new EnumGenericTypeConstraint<Flag>(Flag.Australian);
+            var notValues = flagType.NotValues;
             // var intType = new EnumGenericTypeConstraint<int>(); // Error CS0315  The type 'int' cannot be used as type parameter 'T' in the generic type or method 'GenericsBehaviour73.EnumGenericTypeConstraint<T>'.There is no boxing conversion from 'int' to 'System.Enum'
+            flagType.NotValues
+                .Should()
+                .BeEquivalentTo(new [] {Flag.Canadian});
         }
 
         /* C#
