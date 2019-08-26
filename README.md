@@ -3,13 +3,13 @@
 ## Overview
 
 `c-sharp-language` contains an overview of the features available in C# spanning versions 1.0 through
-to 7.3 based on [What's New in C#](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/)
+to 7.3 based on [The History of C#](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history)
 
 ## Tools
 
 In order to build and run this project you'll need the following:
 
-- [.NET Core 2.1 or higher](https://www.microsoft.com/net/download)
+- [.NET Core 2.2 or higher](https://www.microsoft.com/net/download)
 
 ## Build
 
