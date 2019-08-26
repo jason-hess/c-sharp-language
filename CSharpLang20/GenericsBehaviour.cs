@@ -239,7 +239,86 @@ You can compare them to null. If an unbounded parameter is compared to null, the
             }
         }
 
-        // A delegate can define its own type parameters
+        // A delegate can define its own type parameters:
+
+        public delegate void SomeDelegate<T>(T value);
+
+        public class DelegatesCanHaveTypeParameters
+        {
+            public static void DoSomething(int value)
+            {
+
+            }
+
+            private SomeDelegate<int> someDelegate = new SomeDelegate<int>(DoSomething);
+            // or shorthand in C# 2.0
+            private SomeDelegate<int> shorthand = DoSomething;
+        }
+
+        public class DelegatesCanUseTheClassGnericTypeParameter<T>
+        {
+            public delegate void GenericDelegate(T value);
+        }
+
+        public class UsingTheGenericDelegate
+        {
+            public void Method()
+            {
+                // but you must close the generic if you want to use the delegate:
+                DelegatesCanUseTheClassGnericTypeParameter<int>.GenericDelegate theDelegate;
+            }
+        }
+
+        /** 
+        Generic delegates are especially useful in defining events based on the typical design pattern because the sender argument can be strongly typed and no longer has to be cast to and from Object.
+           
+           C#
+           
+           Copy
+           delegate void StackEventHandler<T, U>(T sender, U eventArgs);
+           
+           class Stack<T>
+           {
+           public class StackEventArgs : System.EventArgs { }
+           public event StackEventHandler<Stack<T>, StackEventArgs> stackEvent;
+           
+           protected virtual void OnStackChanged(StackEventArgs a)
+           {
+           stackEvent(this, a);
+           }
+           }
+           
+           class SampleClass
+           {
+           public void HandleStackChange<T>(Stack<T> stack, Stack<T>.StackEventArgs args) { }
+           }
+           
+           public static void Test()
+           {
+           Stack<double> s = new Stack<double>();
+           SampleClass o = new SampleClass();
+           s.stackEvent += o.HandleStackChange;
+           } */
+
+        // Custom Attributes can only reference open generic types
+        public class CustomAttribute : Attribute
+        {
+            public Type type; 
+        }
+
+        [Custom(type = typeof(SomeClass<>))]
+        public class DecoratedClass<T>
+        {
+            [Custom(type = typeof(SomeClass<int>))]
+            public void Method() { }
+
+
+            // [Custom(type = typeof(SomeClass<T>))] // error: an attribute cannot use type parameters 
+            public void Method2() { }
+        }
+
+        // generic types cannot inherit from System.Attribute
     }
 }
+ 
  
