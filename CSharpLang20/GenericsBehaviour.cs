@@ -186,6 +186,7 @@ You can compare them to null. If an unbounded parameter is compared to null, the
 
         public class GenericBaseClass<T>
         {
+            public void WithinAGenericClassMethodsCanUseTheTypeWithoutSpecifyingTheGenericType(T value) { }
         }
 
         public class CanInheritFromConcreteBase<T> : BaseClass { }
@@ -208,8 +209,37 @@ You can compare them to null. If an unbounded parameter is compared to null, the
         public class MethodsCanHaveGenericTypeParameters
         {
             public void MethodWithGenericTypeParameter<T>(T value) { }
+
+            public void RoslynWillInferTheTypeParameter()
+            {
+                int x = 0;
+                MethodWithGenericTypeParameter(x);
+                MethodWithGenericTypeParameter<int>(0);
+                // note: type inference only works for parameters.  
+                // inferring return types or types used within the method is not done
+                // by the compiler
+            }
+
+            public void MethodsCanBeOverloadedWithDifferentTypeParameters() { }
+            public void MethodsCanBeOverloadedWithDifferentTypeParameters<T>() { }
+            public void MethodsCanBeOverloadedWithDifferentTypeParameters<T, U>() { } 
         }
 
+        /**
+         * In C# 2.0 and later, single-dimensional arrays that have a lower bound of zero automatically implement IList<T>. This enables you to create generic methods that can use the same code to iterate through arrays and other collection types. This technique is primarily useful for reading data in collections. The IList<T> interface cannot be used to add or remove elements from an array. An exception will be thrown if you try to call an IList<T> method such as RemoveAt on an array in this context.
+         */
+
+        public class ArraysInCS20AreILists
+        {
+            [Test]
+            public void ShouldBeList()
+            {
+                int[] anArray = new int[] {0, 1, 2};
+                IList<int> aList = anArray;
+            }
+        }
+
+        // A delegate can define its own type parameters
     }
 }
  
