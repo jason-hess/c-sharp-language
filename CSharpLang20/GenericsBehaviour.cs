@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
@@ -6,8 +7,6 @@ using NUnit.Framework;
 namespace CSharpLang20
 {
     /// <summary>
-    /// http://www.yoda.arachsys.com/csharp/csharp2/delegates.html
-    ///
     /// https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history
     /// </summary> 
     public class GenericsBehaviour
@@ -147,6 +146,70 @@ You can compare them to null. If an unbounded parameter is compared to null, the
 
         // class EmployeeList<T> where T : Employee, IEmployee, System.IComparable<T>, new()
         // {
+
+        // Tips
+        // A good rule is to apply the maximum constraints possible that will still let you handle the types you must handle.
+
+        /** Type parameter naming guidelines
+           Do name generic type parameters with descriptive names, unless a single letter name is completely self explanatory and a descriptive name would not add value.
+           
+           C#
+           
+           Copy
+           public interface ISessionChannel<TSession> { /*...* / }
+           public delegate TOutput Converter<TInput, TOutput>(TInput from);
+           public class List<T> { /*...* / }
+           Consider using T as the type parameter name for types with one single letter type parameter.
+           
+           C#
+           
+           Copy
+           public int IComparer<T>() { return 0; }
+           public delegate bool Predicate<T>(T item);
+           public struct Nullable<T> where T : struct { /*...* / }
+           Do prefix descriptive type parameter names with "T".
+           
+           C#
+           
+           Copy
+           public interface ISessionChannel<TSession>
+           {
+           TSession Session { get; }
+           }
+           Consider indicating constraints placed on a type parameter in the name of parameter. For example, a parameter constrained to ISession may be called TSession.
+           
+           The code analysis rule CA1715 can be used to ensure that type parameters are named appropriately. **/
+
+        // Classes can be generalised:
+
+            public class BaseClass { }
+
+        public class GenericBaseClass<T>
+        {
+        }
+
+        public class CanInheritFromConcreteBase<T> : BaseClass { }
+
+        public class CanInheritFromClosedConstructedBase<T> : GenericBaseClass<int> { }
+
+        public class CanInheritFromOpenConstructedBase<T> : GenericBaseClass<T> { }
+
+        // Generic classes are invariant. In other words, if an input parameter specifies a List<BaseClass>, you will get a compile-time error if you try to provide a List<DerivedClass>.
+
+        // interfaces can have generic type parameters:
+
+        public interface IGenericInterface<T> { }
+        // can specify more than one type parameter
+        public interface IGenericInterfaceWithMultipleTypeParameters<T1, T2> { }
+
+        // multiple interfaces can be specified for type constraints:
+        public class SomeClass<T> where T : IComparable<T>, IEquatable<T> { }
+
+        public class MethodsCanHaveGenericTypeParameters
+        {
+            public void MethodWithGenericTypeParameter<T>(T value) { }
+        }
+
     }
 }
  
