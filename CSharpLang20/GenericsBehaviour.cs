@@ -5,20 +5,15 @@ using NUnit.Framework;
 
 namespace CSharpLang20
 {
-    /// <summary>
-    /// https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history
-    /// </summary> 
     public class GenericsBehaviour
     {
-        // generics avoid the runtime cost of casts or boxing
         // Generic classes and methods combine reusability, type safety and efficiency in a way that
         // their non-generic counterparts cannot. Generics are most frequently used with collections
-        // and the methods that operate on them. 
+        // and the methods that operate on them.  Generics avoid the runtime cost of casts or boxing.
+        // A type parameter is a placeholder for a specific type that a client specifies
+        // when they create an instance of the generic type.  A generic class or method cannot be
+        // used as is, it is more like a blueprint of a Type or method
 
-        // a type parameter is a placeholder for a specific type that a client specifies
-        // when they create an instance of the generic type
-
-        // A generic class cannot be used as is.  It is more like a blueprint of a Type.
         public class GenericContainer<T>
         {
             private readonly T _containedInstance;
@@ -46,81 +41,31 @@ namespace CSharpLang20
             container.Value.Should().Be(10);
         }
 
-        // Constraints inform the compiler about the capabilities a type argument must have.
-        // Without any constraints, the type argument could be any type. The compiler can
-        // only assume the members of System.Object, which is the ultimate base class
-        // for any .NET type.
-
+        /// <summary>
+        /// Generic Type Constraints inform the compiler about the capabilities a type argument
+        /// must have.  Without any constraints, the type argument could be any type.
+        /// The compiler can only assume the members of System.Object, which is the ultimate
+        /// base class for any .NET type.
+        /// By constraining the type parameter, you increase the number of allowable operations and method calls to those supported by the constraining type
+        ///
+        /// A good rule is to apply the maximum constraints possible that will still let you handle the types you must handle.
+        /// </summary>
         public class GenericTypeConstraints
         {
-
-            public class CanBeStructConstraint<T> where T : struct { } // must be a value type excluding Nullable<T>
-
-            public static void MustBeReferenceTypeConstraint<T>(T value) where T: class { } // must be a reference type (interface, delegate or array)
-
-            public static T MustHaveDefaultConstructor<T>() where T : new()
+            /// <summary>
+            /// Type parameters that have no constraints,
+            /// * such as T in public class SampleClass&lt;T&gt;{},
+            /// * are called unbounded type parameters.
+            /// * Unbounded type parameters have the following rules:
+            /// 
+            /// The != and == operators cannot be used because there is no guarantee that the concrete type argument will support these operators.
+            /// They can be converted to and from System.Object or explicitly converted to any interface type.
+            /// You can compare them to null. If an unbounded parameter is compared to null, the comparison will always return false if the type argument is a value type.
+            /// </summary>
+            /// <typeparam name="T"></typeparam>
+            public class NoConstraint<T> // T is a System.Object
             {
-                return new T();
-            }
-
-            public static void MustBeOrInheritFrom<T>() where T : CanBeStructConstraint<int>
-            {
-
-            }
-
-            public static void MustImplementInterface<T, TU>() where T : IEquatable<TU>
-            {
-
-            }
-
-            public static void CanReferToOtherTypeConstraintClasses<TParent, TChild>() where TChild : TParent
-            {
-
-            }
-
-            [Test]
-            public void CanPassDelegateToReferenceTypeConstrainedGeneric()
-            {
-                Action doSomthing = CanPassDelegateToReferenceTypeConstrainedGeneric;
-                MustBeReferenceTypeConstraint(doSomthing);
-            }
-        }
-
-        public class GenericTypeParameterEquality
-        {
-            public static bool TwoThingsAreEqual<T>(T first, T other) where T : class
-            {
-                // This will compile to reference equality and not use an operator
-                // overloaded method even if one exists
-                return first == other;
-            }
-
-            [Test]
-            public void GenericTypeParametersAlwaysCompileToReferenceEquality()
-            {
-                System.String firstString = "1";
-                System.String seconString = 1.ToString();
-                TwoThingsAreEqual(firstString, seconString)
-                    .Should()
-                    .BeFalse("the compiler will compile reference equality for generic type parameters since it doesn't know about operator overloads for types it doesn't know");
-            }
-        }
-
-        /**
-         * Type parameters that have no constraints,
-         * such as T in public class SampleClass<T>{},
-         * are called unbounded type parameters.
-         * Unbounded type parameters have the following rules:
-
-The != and == operators cannot be used because there is no guarantee that the concrete type argument will support these operators.
-They can be converted to and from System.Object or explicitly converted to any interface type.
-You can compare them to null. If an unbounded parameter is compared to null, the comparison will always return false if the type argument is a value type.
-         */
-        public class UnboundedTypeParameters
-        {
-            public class UnboundedGenericTypeParameter<T>
-            {
-                public void DoSomething(T value, T other) 
+                public void DoSomething(T value, T other)
                 {
                     // if (value == other) // Error CS0019  Operator '==' cannot be applied to operands of type 'T' and 'T'
                     // {
@@ -136,18 +81,70 @@ You can compare them to null. If an unbounded parameter is compared to null, the
                     // string asString = (string) value; // Error CS0030  Cannot convert type 'T' to 'string' 
 
                 }
+            } 
+
+            public class CanBeStructConstraint<T> where T : struct { } // must be a value type excluding Nullable<T>
+
+            public static void MustBeReferenceTypeConstraint<T>(T value) where T: class { } // must be a reference type (interface, delegate or array)
+
+            public static T MustHaveDefaultConstructor<T>() where T : new()
+            {
+                return new T();
+            }
+
+            public static void MustBeOrInheritFrom<T>() where T : CanBeStructConstraint<int> { }
+
+            public static void MustImplementInterface<T, TU>() where T : IEquatable<TU> { }
+
+            /// <summary>
+            /// Multiple constraints can be specified and the constraints themselves can be generic types
+            /// </summary>
+            /// <typeparam name="T"></typeparam>
+            public static void CanSpecifyMultipleConstraints<T>() where T: class, IEquatable<T>, new() { }
+
+            public static void CanReferToOtherTypeConstraintClasses<TParent, TChild>() where TChild : TParent { }
+
+            [Test]
+            public void CanPassDelegateToReferenceTypeConstrainedGeneric()
+            {
+                Action doSomething = CanPassDelegateToReferenceTypeConstrainedGeneric;
+                MustBeReferenceTypeConstraint(doSomething);
             }
         }
 
-        // By constraining the type parameter, you increase the number of allowable operations and method calls to those supported by the constraining type
+        /// <summary>
+        /// It is important to be careful with == and != in a generic type.  The compiler
+        /// does not know the type parameter so == and != compile to reference equality
+        /// rather than operator overloads
+        /// </summary>
+        public class GenericTypeParameterEquality
+        {
+            public static bool TwoThingsAreEqual<T>(T first, T other) where T : class
+            {
+                // This will compile to reference equality and not use an operator
+                // overloaded method even if one exists
+                return first == other;
+            }
 
-        // Multiple constraints can be applied to the same type parameter, and the constraints themselves can be generic types
+            /// <summary>
+            /// This test demonstrates that even though the two strings are equivalent
+            /// the generic type returns false since reference equality is used.
+            /// </summary>
+            [Test]
+            public void GenericTypeParametersAlwaysCompileToReferenceEquality()
+            {
+                string firstString = "1";
+                string seconString = 1.ToString();
+                TwoThingsAreEqual(firstString, seconString)
+                    .Should()
+                    .BeFalse("the compiler will compile reference equality for generic type parameters since it doesn't know about operator overloads for types it doesn't know");
+            }
+        }
 
-        // class EmployeeList<T> where T : Employee, IEmployee, System.IComparable<T>, new()
-        // {
+        public class NamingGuidelines
+        {
 
-        // Tips
-        // A good rule is to apply the maximum constraints possible that will still let you handle the types you must handle.
+        }
 
         /** Type parameter naming guidelines
            Do name generic type parameters with descriptive names, unless a single letter name is completely self explanatory and a descriptive name would not add value.
