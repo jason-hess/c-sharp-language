@@ -81,11 +81,11 @@ namespace CSharpLang20
                     // string asString = (string) value; // Error CS0030  Cannot convert type 'T' to 'string' 
 
                 }
-            } 
+            }
 
             public class CanBeStructConstraint<T> where T : struct { } // must be a value type excluding Nullable<T>
 
-            public static void MustBeReferenceTypeConstraint<T>(T value) where T: class { } // must be a reference type (interface, delegate or array)
+            public static void MustBeReferenceTypeConstraint<T>(T value) where T : class { } // must be a reference type (interface, delegate or array)
 
             public static T MustHaveDefaultConstructor<T>() where T : new()
             {
@@ -100,7 +100,7 @@ namespace CSharpLang20
             /// Multiple constraints can be specified and the constraints themselves can be generic types
             /// </summary>
             /// <typeparam name="T"></typeparam>
-            public static void CanSpecifyMultipleConstraints<T>() where T: class, IEquatable<T>, new() { }
+            public static void CanSpecifyMultipleConstraints<T>() where T : class, IEquatable<T>, new() { }
 
             public static void CanReferToOtherTypeConstraintClasses<TParent, TChild>() where TChild : TParent { }
 
@@ -143,64 +143,62 @@ namespace CSharpLang20
 
         public class NamingGuidelines
         {
+            /// <summary>
+            /// Do name generic type parameters with descriptive names,
+            /// unless a single letter name is completely self explanatory
+            /// and a descriptive name would not add value.
+            /// Consider indicating constraints placed on a type parameter
+            /// in the name of parameter. For example, a parameter constrained
+            /// to ISession may be called TSession.
+            /// The code analysis rule CA1715 can be used to ensure that type parameters are named appropriately. **/
+            /// </summary>
+            public void GenericMethod<TComparable>(TComparable comparable) where TComparable : IComparable { }
 
+            /// <summary>
+            /// Consider using T as the type parameter name for types with one single letter type parameter.
+            /// </summary>
+            /// <typeparam name="T"></typeparam>
+            /// <param name="value"></param>
+            public void GenericMethod2<T>(T value) { }
         }
 
-        /** Type parameter naming guidelines
-           Do name generic type parameters with descriptive names, unless a single letter name is completely self explanatory and a descriptive name would not add value.
-           
-           C#
-           
-           Copy
-           public interface ISessionChannel<TSession> { /*...* / }
-           public delegate TOutput Converter<TInput, TOutput>(TInput from);
-           public class List<T> { /*...* / }
-           Consider using T as the type parameter name for types with one single letter type parameter.
-           
-           C#
-           
-           Copy
-           public int IComparer<T>() { return 0; }
-           public delegate bool Predicate<T>(T item);
-           public struct Nullable<T> where T : struct { /*...* / }
-           Do prefix descriptive type parameter names with "T".
-           
-           C#
-           
-           Copy
-           public interface ISessionChannel<TSession>
-           {
-           TSession Session { get; }
-           }
-           Consider indicating constraints placed on a type parameter in the name of parameter. For example, a parameter constrained to ISession may be called TSession.
-           
-           The code analysis rule CA1715 can be used to ensure that type parameters are named appropriately. **/
+        public class GenericClasses
+        {
 
-        // Classes can be generalised:
+
+            // Classes can be generalised:
 
             public class BaseClass { }
 
-        public class GenericBaseClass<T>
-        {
-            public void WithinAGenericClassMethodsCanUseTheTypeWithoutSpecifyingTheGenericType(T value) { }
+            public class GenericBaseClass<T>
+            {
+                public void WithinAGenericClassMethodsCanUseTheTypeWithoutSpecifyingTheGenericType(T value) { }
+            }
+
+            public class CanInheritFromConcreteBase<T> : BaseClass { }
+
+            public class CanInheritFromClosedConstructedBase<T> : GenericBaseClass<int> { }
+
+            public class CanInheritFromOpenConstructedBase<T> : GenericBaseClass<T> { }
+            // Generic classes are invariant. In other words, if an input parameter specifies a List<BaseClass>, you will get a compile-time error if you try to provide a List<DerivedClass>.
+
         }
 
-        public class CanInheritFromConcreteBase<T> : BaseClass { }
-
-        public class CanInheritFromClosedConstructedBase<T> : GenericBaseClass<int> { }
-
-        public class CanInheritFromOpenConstructedBase<T> : GenericBaseClass<T> { }
-
-        // Generic classes are invariant. In other words, if an input parameter specifies a List<BaseClass>, you will get a compile-time error if you try to provide a List<DerivedClass>.
-
         // interfaces can have generic type parameters:
+        public class GenericInterfaces
+        {
+            public interface IGenericInterface<T> { }
 
-        public interface IGenericInterface<T> { }
-        // can specify more than one type parameter
-        public interface IGenericInterfaceWithMultipleTypeParameters<T1, T2> { }
+            // can specify more than one type parameter
+            public interface IGenericInterfaceWithMultipleTypeParameters<T1, T2> { }
 
-        // multiple interfaces can be specified for type constraints:
-        public class SomeClass<T> where T : IComparable<T>, IEquatable<T> { }
+            // multiple interfaces can be specified for type constraints:
+            // the following means T must implement IComparable<T> like:
+            // public class SomeType : IComparable<SomeType> { }
+            public class SomeClass<T> where T : IComparable<T>, IEquatable<T>
+            {
+            }
+        }
 
         public class MethodsCanHaveGenericTypeParameters
         {
@@ -218,7 +216,7 @@ namespace CSharpLang20
 
             public void MethodsCanBeOverloadedWithDifferentTypeParameters() { }
             public void MethodsCanBeOverloadedWithDifferentTypeParameters<T>() { }
-            public void MethodsCanBeOverloadedWithDifferentTypeParameters<T, U>() { } 
+            public void MethodsCanBeOverloadedWithDifferentTypeParameters<T, U>() { }
         }
 
         /**
@@ -230,7 +228,7 @@ namespace CSharpLang20
             [Test]
             public void ShouldBeList()
             {
-                int[] anArray = new int[] {0, 1, 2};
+                int[] anArray = new int[] { 0, 1, 2 };
                 IList<int> aList = anArray;
             }
         }
@@ -299,7 +297,7 @@ namespace CSharpLang20
         // Custom Attributes can only reference open generic types
         public class CustomAttribute : Attribute
         {
-            public Type type; 
+            public Type type;
         }
 
         [Custom(type = typeof(SomeClass<>))]
@@ -316,5 +314,4 @@ namespace CSharpLang20
         // generic types cannot inherit from System.Attribute
     }
 }
- 
- 
+
