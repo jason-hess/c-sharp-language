@@ -56,5 +56,51 @@ namespace CSharpLang10
             x.Should()
                 .Be(1);
         }
+
+        /// <summary>
+        /// The targets of an attribute can be:
+        /// assembly - Entire assembly
+        /// module - Current assembly module
+        /// field - Field in a class or a struct
+        /// event - Event
+        /// method - Method or get and set property accessors
+        /// param - Method parameters or set property accessor parameters
+        /// property - Property
+        /// return - Return value of a method, property indexer, or get property accessor
+        /// type - Struct, class, interface, enum, or delegate
+        /// </summary>
+        public class AttributeTargets
+        {
+            [type: Conditional("DEBUG")]
+            public class MyTargetedAttribute : Attribute
+            {
+                [return: MyAttribute]
+                public int MethodWithReturnAttribute()
+                {
+                    return 0;
+                }
+            }
+
+            // To add an attribute to the assembly you would:
+            // using System;
+            // using System.Reflection;
+            // [assembly: AssemblyTitleAttribute("Production assembly 4")]
+            // [module: CLSCompliant(true)]
+
+            // Common uses for attributes
+            // The following list includes a few of the common uses of attributes in code:
+            // 
+            // - Marking methods using the WebMethod attribute in Web services to indicate that the method should be callable over the SOAP protocol. For more information, see WebMethodAttribute.
+            // - Describing how to marshal method parameters when interoperating with native code. For more information, see MarshalAsAttribute.
+            // - Describing the COM properties for classes, methods, and interfaces.
+            // - Calling unmanaged code using the DllImportAttribute class.
+            // - Describing your assembly in terms of title, version, description, or trademark.
+            // - Describing which members of a class to serialize for persistence.
+            // - Describing how to map between class members and XML nodes for XML serialization.
+            // - Describing the security requirements for methods.
+            // - Specifying characteristics used to enforce security.
+            // - Controlling optimizations by the just-in-time (JIT) compiler so the code remains easy to debug.
+            // - Obtaining information about the caller to a method.
+        }
     }
 }
