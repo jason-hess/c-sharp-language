@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace CSharpLang10
@@ -41,5 +43,18 @@ namespace CSharpLang10
 
         [MyAttribute]
         public void YouCanSpecifyAttributeClassSuffix() { }
+
+        /// <summary>
+        /// Many attributes have parameters, which can be positional, unnamed, or named.
+        /// Any positional parameters must be specified in a certain order and cannot be omitted.
+        /// Named parameters are optional and can be specified in any order. 
+        /// </summary>
+        [Test(Author = "Billy Bob", Description = "Does Some Stuff")]
+        [TestCase(1, Description = "Some Test", Author = "Billy's Brother Bob")]
+        public void AttributeParameters(int x)
+        {
+            x.Should()
+                .Be(1);
+        }
     }
 }
