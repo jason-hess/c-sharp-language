@@ -197,6 +197,8 @@ namespace CSharpLang20
             // public class SomeType : IComparable<SomeType> { }
             public class SomeClass<T> where T : IComparable<T>, IEquatable<T>
             {
+                // note: the above means T must implement IComparable<T>
+                // for example: if T is int, then int must implement IEquatable<int> which it does
             }
         }
 
@@ -216,14 +218,18 @@ namespace CSharpLang20
 
             public void MethodsCanBeOverloadedWithDifferentTypeParameters() { }
             public void MethodsCanBeOverloadedWithDifferentTypeParameters<T>() { }
-            public void MethodsCanBeOverloadedWithDifferentTypeParameters<T, U>() { }
+            public void MethodsCanBeOverloadedWithDifferentTypeParameters<T1, T2>() { }
         }
 
-        /**
-         * In C# 2.0 and later, single-dimensional arrays that have a lower bound of zero automatically implement IList<T>. This enables you to create generic methods that can use the same code to iterate through arrays and other collection types. This technique is primarily useful for reading data in collections. The IList<T> interface cannot be used to add or remove elements from an array. An exception will be thrown if you try to call an IList<T> method such as RemoveAt on an array in this context.
-         */
-
-        public class ArraysInCS20AreILists
+        /// <summary>
+        /// In C# 2.0 and later, single-dimensional arrays that have a lower bound of zero automatically
+        /// implement IList<T>. This enables you to create generic methods that can use the same code to
+        /// iterate through arrays and other collection types. This technique is primarily useful for
+        /// reading data in collections. The IList<T> interface cannot be used to add or remove elements
+        /// from an array. An exception will be thrown if you try to call an IList<T> method such as
+        /// RemoveAt on an array in this context.
+        /// </summary>
+        public class ArraysCSharpLang20ImplementGenericIList
         {
             [Test]
             public void ShouldBeList()
@@ -235,10 +241,11 @@ namespace CSharpLang20
 
         // A delegate can define its own type parameters:
 
-        public delegate void SomeDelegate<T>(T value);
 
         public class DelegatesCanHaveTypeParameters
         {
+            public delegate void SomeDelegate<T>(T value);
+
             public static void DoSomething(int value)
             {
 
@@ -247,71 +254,78 @@ namespace CSharpLang20
             private SomeDelegate<int> someDelegate = new SomeDelegate<int>(DoSomething);
             // or shorthand in C# 2.0
             private SomeDelegate<int> shorthand = DoSomething;
-        }
 
-        public class DelegatesCanUseTheClassGnericTypeParameter<T>
-        {
-            public delegate void GenericDelegate(T value);
-        }
-
-        public class UsingTheGenericDelegate
-        {
-            public void Method()
+            public class DelegatesCanUseTheClassGnericTypeParameter<T>
             {
-                // but you must close the generic if you want to use the delegate:
-                DelegatesCanUseTheClassGnericTypeParameter<int>.GenericDelegate theDelegate;
+                public delegate void GenericDelegate(T value);
             }
+
+
+
+            public class UsingTheGenericDelegate
+            {
+                public void Method()
+                {
+                    // but you must close the generic if you want to use the delegate:
+                    DelegatesCanUseTheClassGnericTypeParameter<int>.GenericDelegate theDelegate;
+                }
+            }
+
+            /** 
+            Generic delegates are especially useful in defining events based on the typical design pattern because the sender argument can be strongly typed and no longer has to be cast to and from Object.
+               
+               C#
+               
+               Copy
+               delegate void StackEventHandler<T, U>(T sender, U eventArgs);
+               
+               class Stack<T>
+               {
+               public class StackEventArgs : System.EventArgs { }
+               public event StackEventHandler<Stack<T>, StackEventArgs> stackEvent;
+               
+               protected virtual void OnStackChanged(StackEventArgs a)
+               {
+               stackEvent(this, a);
+               }
+               }
+               
+               class SampleClass
+               {
+               public void HandleStackChange<T>(Stack<T> stack, Stack<T>.StackEventArgs args) { }
+               }
+               
+               public static void Test()
+               {
+               Stack<double> s = new Stack<double>();
+               SampleClass o = new SampleClass();
+               s.stackEvent += o.HandleStackChange;
+               } */
         }
 
-        /** 
-        Generic delegates are especially useful in defining events based on the typical design pattern because the sender argument can be strongly typed and no longer has to be cast to and from Object.
-           
-           C#
-           
-           Copy
-           delegate void StackEventHandler<T, U>(T sender, U eventArgs);
-           
-           class Stack<T>
-           {
-           public class StackEventArgs : System.EventArgs { }
-           public event StackEventHandler<Stack<T>, StackEventArgs> stackEvent;
-           
-           protected virtual void OnStackChanged(StackEventArgs a)
-           {
-           stackEvent(this, a);
-           }
-           }
-           
-           class SampleClass
-           {
-           public void HandleStackChange<T>(Stack<T> stack, Stack<T>.StackEventArgs args) { }
-           }
-           
-           public static void Test()
-           {
-           Stack<double> s = new Stack<double>();
-           SampleClass o = new SampleClass();
-           s.stackEvent += o.HandleStackChange;
-           } */
-
-        // Custom Attributes can only reference open generic types
-        public class CustomAttribute : Attribute
+        public class AttributesCanReferToGenericTypes
         {
-            public Type type;
+            // Custom Attributes can only reference open generic types
+            public class CustomAttribute : Attribute
+            {
+                public Type type;
+            }
+
+            public class SomeClass<T> { }
+
+            [Custom(type = typeof(SomeClass<>))]
+            public class DecoratedClass<T>
+            {
+                [Custom(type = typeof(SomeClass<int>))]
+                public void Method() { }
+
+
+                // [Custom(type = typeof(SomeClass<T>))] // error: an attribute cannot use type parameters 
+                public void Method2() { }
+            }
+
+            // generic types cannot inherit from System.Attribute
         }
-
-        [Custom(type = typeof(SomeClass<>))]
-        public class DecoratedClass<T>
-        {
-            [Custom(type = typeof(SomeClass<int>))]
-            public void Method() { }
-
-
-            // [Custom(type = typeof(SomeClass<T>))] // error: an attribute cannot use type parameters 
-            public void Method2() { }
-        }
-
-        // generic types cannot inherit from System.Attribute
     }
 }
 
