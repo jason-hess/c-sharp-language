@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using FluentAssertions;
@@ -127,8 +128,11 @@ namespace CSharpLang10
             [AttributeUsage(System.AttributeTargets.All, AllowMultiple = true)]
             public class MyMultipleAttribute : Attribute
             {
-                [MyMultiple]
-                [MyMultiple]
+                public MyMultipleAttribute(string value) { }
+
+                [MyMultiple("1")]
+                [MyMultiple("2")]
+                [MyMultiple("3"), MyMultiple("4")]
                 public void Method() { }
             }
 
@@ -139,6 +143,15 @@ namespace CSharpLang10
                     public int FieldOne;
                     private int _backingValue;
 
+                    /// <summary>
+                    /// The constructor's paraemters become positional parameters for the attribute
+                    /// </summary>
+                    /// <param name="positionalParameter"></param>
+                    public MyAttributeWithParametersAttribute(string positionalParameter)
+                    {
+
+                    }
+
                     public int PropertyOne
                     {
                         get { return _backingValue; }
@@ -146,10 +159,61 @@ namespace CSharpLang10
                     }
                 }
 
-                [MyAttributeWithParameters(FieldOne = 1)]
+                [MyAttributeWithParameters("poisitonalParameterValue", FieldOne = 1)]
                 public void Method() { }
             }
 
+            public class ByDefaultAttributesOnClassesInheritOnDerivedClasses
+            {
+                [AttributeUsage(System.AttributeTargets.All, Inherited = false)]
+                public class ButYouCanDefineAttributesThatDoNotInheritToDerivedClasses : Attribute { }
+            }
+
+        }
+
+        /// <summary>
+        /// You can retrieve information at runtime about attributes defined at compile time
+        /// </summary>
+        public class ReflectingOnAttributes
+        {
+            [AttributeUsage(System.AttributeTargets.Method)]
+            public class MyCustomAttribute : Attribute
+            {
+                public string Value;
+            }
+
+            [MyCustom(Value = "One")]
+            public void MyMethod() { }
+
+            /// <remarks>
+            /// An attribute specification such as:
+            /// 
+            /// C#
+            /// 
+            /// Copy
+            /// [Author("P. Ackerman", version = 1.1)]  
+            /// class SampleClass  
+            /// is conceptually equivalent to this:
+            /// 
+            /// C#
+            /// 
+            /// Copy
+            /// Author anonymousAuthorObject = new Author("P. Ackerman");  
+            /// anonymousAuthorObject.version = 1.1;  
+            /// However, the code is not executed until SampleClass is queried for attributes. Calling GetCustomAttributes on SampleClass causes an Author object to be constructed and initialized as above. If the class has other attributes, other attribute objects are constructed similarly. GetCustomAttributes then returns the Author object and any other attribute objects in an array. You can then iterate over this array, determine what attributes were applied based on the type of each array element, and extract information from the attribute objects.
+            /// </remarks>
+            [Test]
+            public void ShouldBeAbleToSeeCustomAttribute()
+            {
+                MyCustomAttribute attribute =
+                    (MyCustomAttribute)
+                    typeof(ReflectingOnAttributes)
+                        .GetMethods()[0]
+                        .GetCustomAttributes(false)[0];
+                attribute.Value
+                    .Should()
+                    .Be("One");
+            }
         }
     }
 }
