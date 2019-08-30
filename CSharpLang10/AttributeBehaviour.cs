@@ -200,7 +200,13 @@ namespace CSharpLang10
             /// Copy
             /// Author anonymousAuthorObject = new Author("P. Ackerman");  
             /// anonymousAuthorObject.version = 1.1;  
-            /// However, the code is not executed until SampleClass is queried for attributes. Calling GetCustomAttributes on SampleClass causes an Author object to be constructed and initialized as above. If the class has other attributes, other attribute objects are constructed similarly. GetCustomAttributes then returns the Author object and any other attribute objects in an array. You can then iterate over this array, determine what attributes were applied based on the type of each array element, and extract information from the attribute objects.
+            /// However, the code is not executed until SampleClass is queried for attributes. 
+            /// Calling GetCustomAttributes on SampleClass causes an Author object to be constructed 
+            /// and initialized as above. If the class has other attributes, other attribute objects
+            /// are constructed similarly. GetCustomAttributes then returns the Author object and any
+            /// other attribute objects in an array. You can then iterate over this array, determine
+            /// what attributes were applied based on the type of each array element, and extract
+            /// information from the attribute objects.
             /// </remarks>
             [Test]
             public void ShouldBeAbleToSeeCustomAttribute()
