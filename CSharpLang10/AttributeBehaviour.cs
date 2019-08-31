@@ -212,13 +212,11 @@ namespace CSharpLang10
             public void ShouldBeAbleToSeeCustomAttribute()
             {
                 MyCustomAttribute attribute =
-                    (MyCustomAttribute)
                     typeof(ReflectingOnAttributes)
                         .GetMethods()[0]
-                        .GetCustomAttributes(false)[0];
-                attribute.Value
-                    .Should()
-                    .Be("One");
+                        .GetCustomAttributes(false)[0] as MyCustomAttribute;
+                string x = attribute.Value;
+                FluentAssertions.AssertionExtensions.Should(x).Be("One");
             }
         }
     }
