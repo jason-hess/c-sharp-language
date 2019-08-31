@@ -19,7 +19,7 @@ namespace CSharpLang10
     public class AttributeBehaviour
     {
         [Serializable]
-        public class AttributesOnClasses
+        public class AttributesCanBeAssociatedWithClasses
         {
             [Conditional("DEBUG")]
             public void AttributesOnMethods([In, Out]int attributesOnParameters) { }
