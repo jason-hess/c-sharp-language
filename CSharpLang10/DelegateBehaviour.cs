@@ -18,7 +18,7 @@ namespace CSharpLang10
         // can add and remove methods from an instance's invocation list.
         // The compiler will enforce that the signature of the method being
         // added or removed matches the signature used when declaring the method.
-        // Note: ***Although this looks liks a variable is being declared, 
+        // Note: ***Although this looks like a variable is being declared, 
         //       it's actually a type that is being declared***
         public delegate void Swap(ref int first, ref int second);
 
@@ -46,6 +46,10 @@ namespace CSharpLang10
 
             if (SwapMethod == null) return;
 
+            // You invoke the methods in the delegate by invoking the delegate
+            // The following invokes the methods attached to the delegate:
+            // Note: If no methods have been attached to the delegate,
+            //       then NullReferenceException is thrown.
             SwapMethod(ref first, ref second);
             FluentAssertions.AssertionExtensions.Should(first).Be(2);
         }
