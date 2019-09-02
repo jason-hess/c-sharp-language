@@ -326,6 +326,19 @@ namespace CSharpLang20
 
             // generic types cannot inherit from System.Attribute
         }
+
+        // Although not part of the language, the .NET Framework 2.0 (which shipped with C# 2)
+        // contained the Action<T> and Func<T> and Predicate<T> generic delegates
+        // Regarding Func<string, bool> and Predicate<string>:
+        // You might think these two types are equivalent. They are not. These two variables cannot be used interchangeably. A variable of one type cannot be assigned the other type. The C# type system uses the names of the defined types, not the structure.
+        // All these delegate type definitions in the .NET Core Library should mean that you do not need to define a new delegate type for any new feature you create that requires delegates. These generic definitions should provide all the delegate types you need under most situations. You can simply instantiate one of these types with the required type parameters. In the case of algorithms that can be made generic, these delegates can be used as generic types.
+
+        // public static IEnumerable<TSource> Where<TSource> (this IEnumerable<TSource> source, Func<TSource, bool> predicate);
+        // This simple example illustrates how delegates require very little coupling between components. You don't need to create a class that derives from a particular base class. You don't need to implement a specific interface. The only requirement is to provide the implementation of one method that is fundamental to the task at hand.
+
+        // Using the delegate types defined in the Core Framework makes it easier for users to work with the delegates. You don't need to define new types, and developers using your library do not need to learn new, specialized delegate types.
+
+        // TODO: Ready about generic in and out covariances
     }
 }
 

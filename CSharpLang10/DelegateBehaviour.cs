@@ -30,6 +30,7 @@ namespace CSharpLang10
         // in a namespace, or in the global namespace.
 
         public Swap SwapMethod;
+        private int _value;
 
         public void SwapOne(ref int first, ref int second)
         {
@@ -38,11 +39,17 @@ namespace CSharpLang10
             second = temp;
         }
 
+        public void SwapTwo(ref int first, ref int second)
+        {
+            _value = first;
+        }
+
         [Test]
         [TestCase(1, 2)]
         public void ShouldSwap(int first, int second)
         {
-            SwapMethod = SwapOne;
+            SwapMethod += SwapOne;
+            SwapMethod += SwapTwo;
 
             if (SwapMethod == null) return;
 
@@ -52,7 +59,10 @@ namespace CSharpLang10
             //       then NullReferenceException is thrown.
             SwapMethod(ref first, ref second);
             FluentAssertions.AssertionExtensions.Should(first).Be(2);
+            FluentAssertions.AssertionExtensions.Should(_value).NotBe(0);
         }
+
+        // This simple example illustrates how delegates require very little coupling between components. You don't need to create a class that derives from a particular base class. You don't need to implement a specific interface. The only requirement is to provide the implementation of one method that is fundamental to the task at hand.
 
     }
 }
