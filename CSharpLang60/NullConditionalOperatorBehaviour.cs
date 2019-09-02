@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using CSharpLang60.Util;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 
 namespace CSharpLang60
 {

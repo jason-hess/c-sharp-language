@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CSharpLang73
+﻿namespace CSharpLang73
 {
     class AttributesBehaviour73
     {
