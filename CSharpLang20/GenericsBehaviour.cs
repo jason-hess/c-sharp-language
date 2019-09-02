@@ -267,7 +267,7 @@ namespace CSharpLang20
                 public void Method()
                 {
                     // but you must close the generic if you want to use the delegate:
-                    DelegatesCanUseTheClassGnericTypeParameter<int>.GenericDelegate theDelegate;
+                    DelegatesCanUseTheClassGnericTypeParameter<int>.GenericDelegate githeDelegate;
                 }
             }
 

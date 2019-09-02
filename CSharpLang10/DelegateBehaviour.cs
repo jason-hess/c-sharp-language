@@ -21,6 +21,8 @@ namespace CSharpLang10
         //       it's actually a type that is being declared***
         public delegate void Swap(ref int first, ref int second);
 
+        public Swap SwapEvent;
+
         // You can define delegate types inside classes, directly inside namespaces,
         // or even in the global namespace.
 
