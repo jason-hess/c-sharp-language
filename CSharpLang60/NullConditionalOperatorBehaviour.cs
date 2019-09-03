@@ -68,9 +68,9 @@ namespace CSharpLang60
             person?.PerformAction?.Invoke();
         }
 
-        delegate void M(int);
+        delegate void M(int x);
 
-        public void Implementation(int)
+        public void Implementation(int x)
         {
             return;
         }
