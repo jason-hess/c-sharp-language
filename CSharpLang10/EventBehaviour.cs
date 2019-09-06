@@ -1,10 +1,12 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace CSharpLang10
 {
     public class EventBehaviour
     {
-        private int _value;
+        private int _value = 0;
         // Events are, like delegates, a late binding mechanism.
         // In fact, events are built on the language support for delegates.
         // 
@@ -13,7 +15,11 @@ namespace CSharpLang10
         // and be notified when an event is raised.
         // Events are built on delegates
 
-        // You can define events that should be raised for your classes. One important consideration when working with events is that there may not be any object registered for a particular event. You must write your code so that it does not raise events when no listeners are configured.
+        // You can define events that should be raised for your classes.
+        // One important consideration when working with events is that there
+        // may not be any object registered for a particular event.
+        // You must write your code so that it does not raise events
+        // when no listeners are configured.
         // 
         // Subscribing to an event also creates a coupling between two objects (the event source, and the event sink). You need to ensure that the event sink unsubscribes from the event source when no longer interested in events.
 
@@ -33,10 +39,33 @@ namespace CSharpLang10
         [Test]
         public void ShouldRaise()
         {
+            // To raise event, just call it like a delegate
             if (FormClosed != null)
             {
                 FormClosed("closed!");
             }
+        }
+
+        [Test]
+        public void ShouldRaiseWhenNoListener()
+        {
+            try
+            {
+                FormClosed("closed!");
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+
+            FluentAssertions.AssertionExtensions.Should(true).BeFalse();
+        }
+
+        [SetUp]
+        public void SetUp()
+        {
+            // NUnit instantiates the class once
+            _value = 0;
         }
 
         // to subscribe to an event:
@@ -49,9 +78,19 @@ namespace CSharpLang10
             FormClosed -= EventBehaviour_FormClosed;
         }
 
+        // to subscribe to an event:
+        [Test]
+        public void SupportsMulticast()
+        {
+            FormClosed += EventBehaviour_FormClosed;
+            FormClosed += EventBehaviour_FormClosed;
+            ShouldRaise();
+            FluentAssertions.AssertionExtensions.Should(_value).Be(2);
+        }
+
         private void EventBehaviour_FormClosed(string message)
         {
-            _value = 1;
+            _value += 1;
         }
 
         // .NET events generally follow a few known patterns. Standardizing on these patterns means that developers can leverage knowledge of those standard patterns, which can be applied to any .NET event program.

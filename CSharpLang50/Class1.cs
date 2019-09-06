@@ -1,8 +1,9 @@
-﻿using System;
-
-namespace CSharpLang50
+﻿namespace CSharpLang50
 {
-    public class Class1
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history#c-version-50
+    /// </summary>
+    public class AsyncBehaviour
     {
     }
 }
