@@ -1,14 +1,16 @@
-﻿using FluentAssertions;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace CSharpLang10
 {
-    class EventBehaviour
+    public class EventBehaviour
     {
         private int _value;
-        // Events are, like delegates, a late binding mechanism. In fact, events are built on the language support for delegates.
+        // Events are, like delegates, a late binding mechanism.
+        // In fact, events are built on the language support for delegates.
         // 
-        // Events are a way for an object to broadcast (to all interested components in the system) that something has happened. Any other component can subscribe to the event, and be notified when an event is raised.
+        // Events are a way for an object to broadcast (to all interested components in the system)
+        // that something has happened. Any other component can subscribe to the event,
+        // and be notified when an event is raised.
         // Events are built on delegates
 
         // You can define events that should be raised for your classes. One important consideration when working with events is that there may not be any object registered for a particular event. You must write your code so that it does not raise events when no listeners are configured.
@@ -51,5 +53,7 @@ namespace CSharpLang10
         {
             _value = 1;
         }
+
+        // .NET events generally follow a few known patterns. Standardizing on these patterns means that developers can leverage knowledge of those standard patterns, which can be applied to any .NET event program.
     }
 }
