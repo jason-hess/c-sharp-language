@@ -25,10 +25,10 @@ namespace CSharpLang10
 
         // To define an event you use the `event` keyword:
 
-        // The type of the event needs to be a delegate
 
         public delegate void Call(string message);
 
+        // The type of the event needs to be a delegate (below)
         // Tip: Use a past-tense for things that have happened, or present-tense (e.g. Closing) for 
         // events that are about to happen
         public event Call FormClosed;
@@ -39,10 +39,20 @@ namespace CSharpLang10
         [Test]
         public void ShouldRaise()
         {
-            // To raise event, just call it like a delegate
+            // To raise event, just invoke it like a delegate
             if (FormClosed != null)
             {
                 FormClosed("closed!");
+            }
+        }
+
+        [Test]
+        public void ShouldRaiseWithAlternateSyntax()
+        {
+            // To raise event, just invoke it like a delegate (alternate syntax)
+            if (FormClosed != null)
+            {
+                FormClosed.Invoke("closed");
             }
         }
 
@@ -72,27 +82,33 @@ namespace CSharpLang10
         [Test]
         public void ShouldSubscribe()
         {
-            FormClosed += EventBehaviour_FormClosed;
+            FormClosed += OnClosed;
             ShouldRaise();
             FluentAssertions.AssertionExtensions.Should(_value).Be(1);
-            FormClosed -= EventBehaviour_FormClosed;
+            // To unsubscribe:
+            FormClosed -= OnClosed;
         }
 
         // to subscribe to an event:
         [Test]
         public void SupportsMulticast()
         {
-            FormClosed += EventBehaviour_FormClosed;
-            FormClosed += EventBehaviour_FormClosed;
+            FormClosed += OnClosed;
+            FormClosed += OnClosed;
             ShouldRaise();
             FluentAssertions.AssertionExtensions.Should(_value).Be(2);
         }
 
-        private void EventBehaviour_FormClosed(string message)
+        //  The handler method typically is the prefix 'On' followed by the event name, as shown above.
+        private void OnClosed(string message)
         {
             _value += 1;
         }
 
-        // .NET events generally follow a few known patterns. Standardizing on these patterns means that developers can leverage knowledge of those standard patterns, which can be applied to any .NET event program.
+        // .NET events generally follow a few known patterns.
+        // Standardizing on these patterns means that developers can leverage knowledge of
+        // those standard patterns, which can be applied to any .NET event program.
+        // The standard signature for a .NET event delegate is:
+        delegate void OnEventRaised(object sender, EventArgs args);
     }
 }
