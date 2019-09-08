@@ -339,6 +339,10 @@ namespace CSharpLang20
         // Using the delegate types defined in the Core Framework makes it easier for users to work with the delegates. You don't need to define new types, and developers using your library do not need to learn new, specialized delegate types.
 
         // TODO: Ready about generic in and out covariances
+
+        // In C# 2.0 since we have generics, the event delegate no longer needs to be
+        // declared, we can use EventHandler<T> instead.
+        public event EventHandler<EventArgs> EventDelegateIsAlreadyDefined;
     }
 }
 

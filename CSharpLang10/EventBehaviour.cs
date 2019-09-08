@@ -31,7 +31,13 @@ namespace CSharpLang10
         // The type of the event needs to be a delegate (below)
         // Tip: Use a past-tense for things that have happened, or present-tense (e.g. Closing) for 
         // events that are about to happen
+
+        // The simplest way to declare an event for your class is as a public field.
+        // The compiler emits code that means although this looks like a field, it can 
+        // only be accessed in safe ways.
         public event Call FormClosed;
+
+        // The only two operations allowed on the above are add (+=) and remove (-=).
 
         // The type of the event (EventHandler<FileListArgs> in this example) must be a delegate type. There are a number of conventions that you should follow when declaring an event. Typically, the event delegate type has a void return. Event declarations should be a verb, or a verb phrase. Use past tense (as in this example) when the event reports something that has happened. Use a present tense verb (for example, Closing) to report something that is about to happen. Often, using present tense indicates that your class supports some kind of customization behavior. One of the most common scenarios is to support cancellation. For example, a Closing event may include an argument that would indicate if the close operation should continue, or not. Other scenarios may enable callers to modify behavior by updating properties of the event arguments. You may raise an event to indicate a proposed next action an algorithm will take. The event handler may mandate a different action by modifying properties of the event argument.
 
@@ -109,6 +115,38 @@ namespace CSharpLang10
         // Standardizing on these patterns means that developers can leverage knowledge of
         // those standard patterns, which can be applied to any .NET event program.
         // The standard signature for a .NET event delegate is:
-        delegate void OnEventRaised(object sender, EventArgs args);
+        public delegate void OnEventRaised(object sender, EventArgs args);
+        // The single return value doesn't scale for multiple subscribers.  Hence void.
+        // The first argument is the sender, the second typically derives from EventArgs
+        // EventArgs.Empty should be used if there are no EventArgs
+
+        public event OnEventRaised EventRaised;
+
+        [Test]
+        public void RaiseConvention()
+        {
+            if (EventRaised != null)
+            {
+                EventRaised.Invoke(this, EventArgs.Empty);
+            }
+        }
+
+        // Using an event model means you can have multiple subscribers, each with their own 
+        // response to the event
+
+        // Suggestion: Keep your EventArgs immutable
+
+        public class FileFound : EventArgs
+        {
+            public string FullPath;
+        }
+
+        // Communicating from the handler to the sender of the event.  E.g. Cancellation
+        // Since the event handler is a void return, the standard pattern is to 
+        // include fields on the EventArgs object that receivers can use to communicate
+        // cancellation
+        // There are two patterns, either the cancellation flag is false and someone
+        // must set it true or it is ture and all receivers must set it false.
+
     }
 }
