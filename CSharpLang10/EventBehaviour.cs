@@ -119,6 +119,8 @@ namespace CSharpLang10
         // The single return value doesn't scale for multiple subscribers.  Hence void.
         // The first argument is the sender, the second typically derives from EventArgs
         // EventArgs.Empty should be used if there are no EventArgs
+        // Otherwise, you typically derive a class from EventArgs for the second argument
+        // ** If your event type does not need any additional arguments, you will still provide both arguments. There is a special value, EventArgs.Empty that you should use to denote that your event does not contain any additional information.
 
         public event OnEventRaised EventRaised;
 
@@ -148,5 +150,37 @@ namespace CSharpLang10
         // There are two patterns, either the cancellation flag is false and someone
         // must set it true or it is ture and all receivers must set it false.
 
+        public class FileFoundEventArgs : EventArgs
+        {
+            public FileFoundEventArgs(string fullPath)
+            {
+                FullPath = fullPath;
+            }
+
+            public string FullPath;
+            public bool Cancel = false;
+        }
+
+        public delegate void FileFoundEvent(object sender, FileFoundEventArgs eventArgs);
+
+        public event FileFoundEvent OnFileFound;
+
+        [Test]
+        public void ShouldCancel()
+        {
+            OnFileFound += EventBehaviour_OnFileFound;
+
+            FileFoundEventArgs args = new FileFoundEventArgs(@"c:\temp\1.txt");
+            OnFileFound.Invoke(this, args);
+            if (args.Cancel)
+            {
+                return;
+            }
+        }
+
+        private void EventBehaviour_OnFileFound(object sender, FileFoundEventArgs eventArgs)
+        {
+            eventArgs.Cancel = true;
+        }
     }
 }
