@@ -343,6 +343,8 @@ namespace CSharpLang20
         // In C# 2.0 since we have generics, the event delegate no longer needs to be
         // declared, we can use EventHandler<T> instead.
         public event EventHandler<EventArgs> EventDelegateIsAlreadyDefined;
+
+        // In .NET Core, EventHandler<T> does not have the constraint that T is derived from EventArgs
     }
 }
 

@@ -150,6 +150,7 @@ namespace CSharpLang10
         // There are two patterns, either the cancellation flag is false and someone
         // must set it true or it is ture and all receivers must set it false.
 
+        // The recommendation is that EventArgs should be immutable if you can make them
         public class FileFoundEventArgs : EventArgs
         {
             public FileFoundEventArgs(string fullPath)
@@ -158,7 +159,8 @@ namespace CSharpLang10
             }
 
             public string FullPath;
-            public bool Cancel = false;
+            public bool Cancel = false; // the nice thing about just adding this flag is that 
+            // it is very loose coupling.  Only clients who want to use it need to.
         }
 
         public delegate void FileFoundEvent(object sender, FileFoundEventArgs eventArgs);
@@ -182,5 +184,30 @@ namespace CSharpLang10
         {
             eventArgs.Cancel = true;
         }
+
+        // TODO: Talk about the EventHandler delegate
+
+        // In addition to the field syntax, you can explicitly create the event property
+        // with add and remove handlers.  The syntax is similar to properties.
+
+        internal event EventHandler DirectoryChanged
+        {
+            add
+            {
+                directoryChanged += value;
+                Console.WriteLine("Hello");
+            }
+            remove { directoryChanged -= value; }
+        }
+        // You must declare a private backing field for the event
+        private EventHandler directoryChanged;
+
+        // Events vs. Delegates
+        // Use Events is subscription is optional.  Use delegates to inject an implementation.
+        // If your code can complete all its work without calling any subscribers, use events.
+        // Delegates for events must use void.  If you need a return value, then you'll need a delegate.
+        // Event subscriptions also typically tend to be long-lived (e.g. the duration of a program)
+        // while delegates can be short lived (e.g. passed to a method)
+
     }
 }
