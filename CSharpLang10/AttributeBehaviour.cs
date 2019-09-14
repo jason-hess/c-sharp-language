@@ -70,6 +70,7 @@ namespace CSharpLang10
         /// </summary>
         public class AttributeTargets
         {
+            // How to specify the target of an attribute:
             [type: Conditional("DEBUG")]
             public class MyTargetedAttribute : Attribute
             {
