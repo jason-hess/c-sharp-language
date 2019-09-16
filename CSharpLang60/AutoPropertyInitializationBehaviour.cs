@@ -8,26 +8,6 @@ namespace CSharpLang60
     /// </summary>
     public class AutoPropertyInitializationBehaviour
     {
-        AutoPropertyInitializationExample _underTest;
-
-        [SetUp]
-        public void SetUp()
-        {
-            _underTest = new AutoPropertyInitializationExample();
-        }
-
-        [Test]
-        public void ReadOnlyAutoPropertyShouldBeTen()
-        {
-            _underTest.ReadOnlyAutoPropertySetInline.Should().Be(11);
-        }
-
-        [Test]
-        public void AutoPropertyShouldBeTen()
-        {
-            _underTest.AutoPropertySetInline.Should().Be(10);
-        }
-
         public class AutoPropertyInitializationExample
         {
             public AutoPropertyInitializationExample() { }
@@ -54,6 +34,26 @@ namespace CSharpLang60
             {
                 AutoPropertyWithPrivateSetterSetInline = value;
             }
+        }
+
+        AutoPropertyInitializationExample _underTest;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _underTest = new AutoPropertyInitializationExample();
+        }
+
+        [Test]
+        public void ReadOnlyAutoPropertyShouldBeTen()
+        {
+            _underTest.ReadOnlyAutoPropertySetInline.Should().Be(11);
+        }
+
+        [Test]
+        public void AutoPropertyShouldBeTen()
+        {
+            _underTest.AutoPropertySetInline.Should().Be(10);
         }
     }
 }

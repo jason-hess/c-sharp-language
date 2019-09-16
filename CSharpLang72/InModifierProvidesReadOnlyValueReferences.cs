@@ -19,7 +19,9 @@ namespace CSharpLang73
 
         #region Private Members
 
-        private static int ReceiveReadOnlyValueByReference(in int length, int expectedValue)
+        // thoughts: I don't know if I would use this.  Without it, length if modified 
+        // won't be returned anyway... it could be useful for performance reasons
+        private static int ReceiveReadOnlyValueByReference(in int length, in int expectedValue)
         {
             // length++; // CS8331	Cannot assign to variable 'in int' because it is a readonly variable
             return length + expectedValue;
