@@ -4,8 +4,8 @@ using NUnit.Framework;
 namespace CSharpLang60
 {
     /// <summary>
-    /// Functions and Read-Only Auto Properties can now be implemented with an expression
-    /// bodied function.  This is useful for then you have a function or property that 
+    /// Method and Read-Only Auto Properties can now be implemented with an expression
+    /// bodied function.  This is useful for then you have a method or property that 
     /// is implemented with a single line of code.
     /// </summary>
     public class ExpressionBodiedFunctionMemberBehaviour

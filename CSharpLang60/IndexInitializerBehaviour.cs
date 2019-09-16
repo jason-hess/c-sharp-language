@@ -11,22 +11,29 @@ namespace CSharpLang60
     public class IndexInitializerBehaviour
     {
         [Test]
-        public void InPreviousVersionsYouCouldInitialiseSequenceStyleCollections()
-        {
-            var list = new List<string>()
-            {
-                "one", "two", "three"
-            };
-        }
-
-        [Test]
         public void CanNowInitializeIndexedCollections()
         {
+            // also useful for when indexer takes more than one parameter
             var dictionary = new Dictionary<int, string>
             {
                 [1] = "one",
                 [2] = "two",
                 [3] = "three",
+            };
+
+            // previous format
+            var dictionaryToo = new Dictionary<int, string>
+            {
+                { 1, "one"}
+            };
+        }
+
+        [Test]
+        public void InPreviousVersionsYouCouldInitialiseSequenceStyleCollections()
+        {
+            var list = new List<string>()
+            {
+                "one", "two", "three"
             };
         }
     }

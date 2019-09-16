@@ -12,6 +12,33 @@ namespace CSharpLang60
     /// </summary>
     public class ExceptionFilterBehaviour
     {
+        [Test]
+        public void CanInvokeMethodsInExceptionFilters()
+        {
+            try
+            {
+                throw new Exception();
+            }
+            catch (Exception ex) when (ShouldCatchException(ex))
+            {
+
+            }
+            catch (Exception) when (ShouldCatchAllExceptions())
+            {
+                // filters are checked in order
+            }
+            catch (Exception) when (!System.Diagnostics.Debugger.IsAttached)
+            {
+                // do something when not debugging
+            }
+            // Note: `await` is not supported for filters.  The following generates
+            // Error	CS7094	Cannot await in the filter expression of a catch clause
+            //catch (Exception ex) when (await ShouldCatchException(ex))
+            //{
+
+            //}
+        }
+
         private void RethrowException()
         {
             try
@@ -118,32 +145,7 @@ namespace CSharpLang60
             }
         }
 
-        [Test]
-        public void CanInvokeMethodsInExceptionFilters()
-        {
-            try
-            {
-                throw new Exception();
-            }
-            catch (Exception ex) when (ShouldCatchException(ex))
-            {
-
-            }
-            catch (Exception) when (ShouldCatchAllExceptions())
-            {
-                // filters are checked in order
-            }
-            catch (Exception) when (!System.Diagnostics.Debugger.IsAttached)
-            {
-                // do something when not debugging
-            }
-            // Note: `await` is not supported for filters.  The following generates
-            // Error	CS7094	Cannot await in the filter expression of a catch clause
-            //catch (Exception ex) when (await ShouldCatchException(ex))
-            //{
-
-            //}
-        }
+        
 
         private bool ShouldCatchException(Exception ex)
         {
