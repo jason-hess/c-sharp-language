@@ -10,7 +10,6 @@ namespace CSharpLang60
     /// the same behaviour will occur as if it was synchronous code - the surrounding code
     /// is searched for a catch block.
     /// </summary>
-    /// <returns></returns>
     public class AwaitInCatchAndFinallyBlocksBehaviour
     {
         [Test]
