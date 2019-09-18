@@ -18,5 +18,7 @@ namespace CSharpLang60
             x.Length = 11;
             y.Length.Should().Be(10);
         }
+
+        // TODO: Also readonly members
     }
 }

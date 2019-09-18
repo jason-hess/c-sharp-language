@@ -69,7 +69,7 @@ namespace CSharpLang10
             {
                 FormClosed("closed!");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return;
             }
