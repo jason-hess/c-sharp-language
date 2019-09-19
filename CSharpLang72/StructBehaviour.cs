@@ -13,10 +13,11 @@ namespace CSharpLang72
         {
             public ReadOnlyPoint(int x)
             {
-                X = x;
+                // X = x;
             }
 
-            public int X;
+            // public int X; // Error CS8340  Instance fields of readonly structs must be readonly.
+
         }
     }
 }
