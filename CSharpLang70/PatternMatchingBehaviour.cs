@@ -149,6 +149,17 @@ namespace CSharpLang70
             r.Length.Should().Be(1);
 
         }
+
+        [Test]
+        public void IsNull()
+        {
+            string aString = null;
+            aString = null;
+            if (aString is null)
+            {
+
+            }
+        }
     }
 
     public struct Rectangle
