@@ -29,6 +29,10 @@ namespace CSharpLang80
         public void Method(Person o)
         {
             var result = o?.Name;
+            // Note: I can run this code and it passes!
+            // Note: To fail on compilation I can do this: <WarningsAsErrors>CS8600;CS8602;CS8603</WarningsAsErrors>
+            // https://www.tabsoverspaces.com/233764-switch-to-errors-instead-of-warnings-for-nullable-reference-types-in-csharp-8
+            // TODO: !bang operator - what is it?
             string nonNullableReferenceType = null;
             string? nullableReferenceType = null;
             // The compiler warns you if you are dereferencing a nullable reference that might be null
