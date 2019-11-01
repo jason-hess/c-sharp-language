@@ -10,6 +10,21 @@ namespace CSharpLang70
     /// Pattern Matching in C# 7.0 now make it easier to write dispatching algorithms.
     /// This allows you to implement dispatch patterns for types and data elements 
     /// that are not related through an inheritance hierarchy.
+    ///
+    /// Pattern matching is a feature that allows you to implement method dispatch on
+    /// properties other than the type of an object. You're probably already familiar
+    /// with method dispatch based on the type of an object. In object-oriented
+    /// programming, virtual and override methods provide language syntax to
+    /// implement method dispatching based on an object's type.
+    /// Base and Derived classes provide different implementations.
+    /// Pattern matching expressions extend this concept so that you can
+    /// easily implement similar dispatch patterns for types and data elements
+    /// that aren't related through an inheritance hierarchy
+    ///
+    /// Pattern matching supports is expressions and switch expressions.
+    /// Each enables inspecting an object and its properties to determine
+    /// if that object satisfies the sought pattern. You use the when keyword
+    /// to specify additional rules to the pattern.
     /// </summary>
     public class PatternMatchingBehaviour
     {
@@ -65,7 +80,7 @@ namespace CSharpLang70
         /// <summary>
         /// Note the special value cases in addition to the type cases.
         ///
-        /// Note: The order of the switch cases now matter!
+        /// Note: The order of the switch cases now matter!  The first to match is executed, and the rest are skipped.
         /// Note: The default case is always evaluated last no matter what order it appears in
         /// within the case statement.
         /// </summary>
@@ -77,7 +92,6 @@ namespace CSharpLang70
             switch (o)
             {
                 case 0:
-                    break;
                 case null:
                     break;
                 case int y when y > 10:
