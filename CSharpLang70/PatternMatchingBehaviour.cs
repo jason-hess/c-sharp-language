@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using FluentAssertions;
+using NUnit.Framework.Internal;
 
 namespace CSharpLang70
 {
@@ -132,11 +135,11 @@ namespace CSharpLang70
         {
             // Previously if you wanted to type check a struct, it would be copied
             // to a new variable
-            var r = new Rectangle() {Length = 1};
+            var r = new RectangleStruct() { Length = 1 };
             object o = r;
-            if (o is Rectangle)
+            if (o is RectangleStruct)
             {
-                var y = (Rectangle) o;
+                var y = (RectangleStruct)o;
                 y.Length++;
                 y.Length.Should().Be(2);
 
@@ -151,9 +154,9 @@ namespace CSharpLang70
         {
             // Previously if you wanted to type check a struct, it would be copied
             // to a new variable
-            var r = new Rectangle() { Length = 1 };
+            var r = new RectangleStruct() { Length = 1 };
             object o = r;
-            if (o is Rectangle y)
+            if (o is RectangleStruct y)
             {
                 y.Length++;
                 y.Length.Should().Be(2);
@@ -174,10 +177,194 @@ namespace CSharpLang70
 
             }
         }
-    }
 
-    public struct Rectangle
-    {
-        public int Length;
+        [Test]
+        public void NullSwitchBehaviour()
+        {
+            Thing aThing = null;
+            switch (aThing)
+            {
+                case Thing theThing:
+                    theThing.Should().NotBeNull();
+                    break;
+                default:
+                    false.Should().BeTrue();
+                    break;
+            }
+        }
+
+        [Test]
+        public void SHould()
+        {
+            int[] values = { 2, 4, 6, 8, 10 };
+            ShowCollectionInformation(values);
+
+            var names = new List<string>();
+            names.AddRange(new string[] { "Adam", "Abigail", "Bertrand", "Bridgette" });
+            ShowCollectionInformation(names);
+
+            List<int> numbers = null;
+            ShowCollectionInformation(numbers);
+        }
+
+        private static void ShowCollectionInformation(object coll)
+        {
+            switch (coll)
+            {
+                case Thing thing:
+                    break;
+                case Array arr:
+                    Console.WriteLine($"An array with {arr.Length} elements.");
+                    break;
+                case IEnumerable<int> ieInt:
+                    Console.WriteLine($"Average: {ieInt.Average(s => s)}");
+                    break;
+                case IList list:
+                    Console.WriteLine($"{list.Count} items");
+                    break;
+                case IEnumerable ie:
+                    string result = "";
+                    foreach (var e in ie)
+                        result += "${e} ";
+                    Console.WriteLine(result);
+                    break;
+                case null:
+                    // Do nothing for a null.
+                    break;
+                default:
+                    Console.WriteLine($"A instance of type {coll.GetType().Name}");
+                    break;
+            }
+        }
+
+        [Test]
+        public void CSharp70SwitchCaseWhenExample()
+        {
+            Shape sh = null;
+            Shape[] shapes = { new Square(10), new Rectangle(5, 7),
+                sh, new Square(0), new Rectangle(8, 8),
+                new Circle(3) };
+            foreach (var shape in shapes)
+                ShowShapeInfo(shape);
+        }
+
+        private static void ShowShapeInfo(Shape sh)
+        {
+            switch (sh)
+            {
+                // Note that this code never evaluates to true.
+                case Shape shape when shape == null:
+                    Console.WriteLine($"An uninitialized shape (shape == null)");
+                    break;
+                case null:
+                    Console.WriteLine($"An uninitialized shape");
+                    break;
+                case Shape shape when sh.Area == 0:
+                    Console.WriteLine($"The shape: {sh.GetType().Name} with no dimensions");
+                    break;
+                case Square sq when sh.Area > 0:
+                    Console.WriteLine("Information about square:");
+                    Console.WriteLine($"   Length of a side: {sq.Side}");
+                    Console.WriteLine($"   Area: {sq.Area}");
+                    break;
+                case Rectangle r when r.Length == r.Width && r.Area > 0:
+                    Console.WriteLine("Information about square rectangle:");
+                    Console.WriteLine($"   Length of a side: {r.Length}");
+                    Console.WriteLine($"   Area: {r.Area}");
+                    break;
+                case Rectangle r when sh.Area > 0:
+                    Console.WriteLine("Information about rectangle:");
+                    Console.WriteLine($"   Dimensions: {r.Length} x {r.Width}");
+                    Console.WriteLine($"   Area: {r.Area}");
+                    break;
+                case Shape shape when sh != null:
+                    Console.WriteLine($"A {sh.GetType().Name} shape");
+                    break;
+                default:
+                    Console.WriteLine($"The {nameof(sh)} variable does not represent a Shape.");
+                    break;
+            }
+
+                
+        }
+
+        [Test]
+        public void IsBehaviour()
+        {
+            object o = new Thing();
+            if (o is Thing aThing)
+            {
+                aThing.ToString();
+            }
+        }
+
+        public class Thing
+        {
+
+        }
+
+        public struct RectangleStruct
+        {
+            public int Length;
+        }
+
+        public abstract class Shape
+        {
+            public abstract double Area { get; }
+            public abstract double Circumference { get; }
+        }
+
+        public class Rectangle : Shape
+        {
+            public Rectangle(double length, double width)
+            {
+                Length = length;
+                Width = width;
+            }
+
+            public double Length { get; set; }
+            public double Width { get; set; }
+
+            public override double Area
+            {
+                get { return Math.Round(Length * Width, 2); }
+            }
+
+            public override double Circumference
+            {
+                get { return (Length + Width) * 2; }
+            }
+        }
+
+        public class Square : Rectangle
+        {
+            public Square(double side) : base(side, side)
+            {
+                Side = side;
+            }
+
+            public double Side { get; set; }
+        }
+
+        public class Circle : Shape
+        {
+            public Circle(double radius)
+            {
+                Radius = radius;
+            }
+
+            public double Radius { get; set; }
+
+            public override double Circumference
+            {
+                get { return 2 * Math.PI * Radius; }
+            }
+
+            public override double Area
+            {
+                get { return Math.PI * Math.Pow(Radius, 2); }
+            }
+        }
+
     }
 }
