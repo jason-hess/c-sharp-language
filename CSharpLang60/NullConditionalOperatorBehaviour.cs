@@ -1,4 +1,8 @@
-﻿using FluentAssertions;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using FluentAssertions;
 using NUnit.Framework;
 using CSharpLang60.Util;
 
@@ -96,6 +100,16 @@ namespace CSharpLang60
              */
             M myMethod = Implementation;
             myMethod?.Invoke(0);
+        }
+
+        [Test]
+        public void DisposeExample()
+        {
+            object o = "hello";
+            (o as IDisposable)?.Dispose();
+            (o as IList<int>)?.Clear();
+
+
         }
     }
 }

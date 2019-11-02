@@ -133,6 +133,9 @@ namespace CSharpLang60
             }
         }
 
+        /// <summary>
+        /// A good example of C# 6.0 switching on an enum
+        /// </summary>
         public void CanSwitchOnEnum()
         {
             switch (DateTime.Now.DayOfWeek)
