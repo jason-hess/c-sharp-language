@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 
 namespace CSharpLang60
@@ -8,7 +6,7 @@ namespace CSharpLang60
     /// <summary>
     /// C# 6.0 (and prior) switch statement behaviour
     /// </summary>
-    class SwitchExpressionBehaviour
+    class SwitchStatementBehaviour
     {
         [Test]
         [TestCase(null)]
@@ -112,7 +110,7 @@ namespace CSharpLang60
             {
                 case 1:
                     break;
-                //case "10": // Error CS0029  Cannot implicitly convert type 'string' to 'int' 
+                    //case "10": // Error CS0029  Cannot implicitly convert type 'string' to 'int' 
 
                     break;
             }
@@ -155,6 +153,19 @@ namespace CSharpLang60
                     break;
             }
         }
+
+
+public bool IsWeekend(string dayOfWeek)
+{
+    if(dayOfWeek == "Sunday")
+    {
+        return true;
+    } else if (dayOfWeek == "Saturday")
+    {
+        return true;
+    }
+    return false;
+}
 
         public class Thing
         {

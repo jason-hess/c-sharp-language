@@ -62,9 +62,13 @@ namespace CSharpLang10
             }
         }
 
+        public class Thing { }
+
         [Test]
         public void ShouldRaiseWhenNoListener()
         {
+            object o = new Thing();
+            object p = o as Thing;
             try
             {
                 FormClosed("closed!");
