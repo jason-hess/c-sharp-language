@@ -1,5 +1,6 @@
 ﻿// You can enable nullable and nonnullable reference types with the following:
-#nullable enable 
+#nullable enable
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace CSharpLang80
@@ -24,26 +25,64 @@ namespace CSharpLang80
     /// </summary>
     public class NullableReferenceBehaviour
     {
+        static readonly HashSet<string> _contextFilters = new  HashSet<string>()
+        {
+            // unnecessary function host noise
+            "Host.Aggregator",
+            "Host.Results",
+            "Host.Singleton"
+        };
+
         [Test]
         [TestCase(null)]
         public void Method(Person o)
         {
+            Person o = null;
+
+
+
+
+
+
+
             var result = o?.Name;
             // Note: I can run this code and it passes!
             // Note: To fail on compilation I can do this: <WarningsAsErrors>CS8600;CS8602;CS8603</WarningsAsErrors>
             // https://www.tabsoverspaces.com/233764-switch-to-errors-instead-of-warnings-for-nullable-reference-types-in-csharp-8
             // TODO: !bang operator - what is it?
-            //string nonNullableReferenceType = null;
+            string nonNullableReferenceType = null;
             string? nullableReferenceType = null;
+
             // The compiler warns you if you are dereferencing a nullable reference that might be null
             // You can override that behaviour by using the null-forgiving operator:
             int length = nullableReferenceType!.Length;
+        }
+
+        public void Compute<T>(T o) where T : class?
+        {
+            o = null;
+            var doStuffer = new DoStuffer<string, string>();
+        }
+    }
+
+    interface IDoStuff<TIn, TOut>
+    where TIn : notnull
+    where TOut : notnull
+    {
+        void DoStuff(TIn input);
+    }
+
+    public class DoStuffer<TIn, TOut> : IDoStuff<TIn, TOut> 
+        where TIn : notnull 
+        where TOut : notnull
+    {
+        public void DoStuff(TIn input)
+        {
         }
     }
 
     public class Person
     {
         public string Name { get; set; } = "";
-
     }
 }
