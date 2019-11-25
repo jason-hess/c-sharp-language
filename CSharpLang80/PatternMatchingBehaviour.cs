@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Net.Sockets;
 using NUnit.Framework;
 
 namespace CSharpLang80
@@ -26,6 +28,16 @@ namespace CSharpLang80
         }
 
         [Test]
+        public void ShouldDoSomething()
+        {
+            var x = (1, 2);
+            switch (x)
+            {
+                case (1, 2): return;
+            }
+        }
+
+        [Test]
         public void Should2()
         {
             object x = 10;
@@ -49,9 +61,33 @@ namespace CSharpLang80
             };
             return v;
         }
+
+        public void MySwitchExample()
+        {
+            Thing o = new Thing();
+            switch (o)
+            {
+                case { Property: 1 }:
+                    return;
+            }
+
+            bool? isWeekday = null;
+
+#nullable enable
+            List<Thing> list = new List<Thing>();
+            list.Add(null);
+
+            GenericList<Thing> gList = new GenericList<Thing>();
+
+        }
     }
 
     public class Thing
+    {
+        public int Property { get; set; }
+    }
+
+    public class GenericList<T> where T : notnull
     {
 
     }

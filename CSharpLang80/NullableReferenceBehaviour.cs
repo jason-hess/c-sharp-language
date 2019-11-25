@@ -34,12 +34,24 @@ namespace CSharpLang80
         };
 
         [Test]
-        [TestCase(null)]
-        public void Method(Person o)
+        public void NullTest()
         {
-            Person o = null;
+            DoSomething(null);
+        }
 
+        public void DoSomething(Person p)
+        {
+            if (p == null) return;
+        }
 
+        [Test]
+        [TestCase(null)]
+        public void Method(Person? o)
+        {
+            if (o != null)
+            {
+                Person p = o;
+            }
 
 
 

@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace CSharpLang10
@@ -17,14 +18,32 @@ namespace CSharpLang10
     /// </summary>
     public class StructBehaviour
     {
+        public int Calculate(int a, int b, int operation)
+        {
+            int y = 1;
+            switch (y)
+            {
+                case "10": return 0;
+                default: return 1;
+            }
+        }
+
         [Test]
         public void StructsCanBeCreatedWithoutNewButFieldsMustFirstBeInitialized()
         {
             Rectangle r; // this variable contains the value
 
-            // r.Length.Should().Be(10); // CS0170 - Use of possibly unassign field 'Length'
+            // Error CS0151 A switch expression or case label must be a bool, char, string, integral, enum, or corresponding nullable type in C# 6 and earlier
             r.Width = 10;
             r.Width.Should().Be(10);
+
+            object x = "";
+            int o = (int)x;
+            switch (o)
+            {
+                case 2: return;
+                case 3: return;
+            }
         }
 
         [Test]

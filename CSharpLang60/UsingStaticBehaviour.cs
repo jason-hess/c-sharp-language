@@ -20,6 +20,15 @@ namespace CSharpLang60
             IsNullOrEmpty("hello").Should().BeFalse();
         }
 
+        public void Test(bool? value)
+        {
+            var isWeekend = value;
+            if(isWeekend == null)
+            {
+                System.Console.WriteLine("HERE");
+            }
+        }
+
         /// <summary>
         /// Even with the `using static CSharpLang60.StringExtensions` statement, 
         /// CsharpLang60.StringExtensions.CaseInsensitiveEquals is not imported
