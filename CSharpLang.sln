@@ -33,9 +33,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpLang80", "CSharpLang8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpLangX", "CSharpLangX\CSharpLangX.csproj", "{97DDA934-C82F-48EC-951C-47017F31FB31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncEnumerableApp", "AsyncEnumerableApp\AsyncEnumerableApp.csproj", "{F3F777FF-36FB-49A5-A2D3-F70A6588FAFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncEnumerableApp", "AsyncEnumerableApp\AsyncEnumerableApp.csproj", "{F3F777FF-36FB-49A5-A2D3-F70A6588FAFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncEnumerableApp2", "AsyncEnumerableApp2\AsyncEnumerableApp2.csproj", "{AE1D518A-A482-4988-9A40-57FFF5C7922E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncEnumerableApp2", "AsyncEnumerableApp2\AsyncEnumerableApp2.csproj", "{AE1D518A-A482-4988-9A40-57FFF5C7922E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLang40", "CSharpLang40\CSharpLang40.csproj", "{BB360855-CC19-4B13-9E8E-BC50712A27D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +101,10 @@ Global
 		{AE1D518A-A482-4988-9A40-57FFF5C7922E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE1D518A-A482-4988-9A40-57FFF5C7922E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE1D518A-A482-4988-9A40-57FFF5C7922E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB360855-CC19-4B13-9E8E-BC50712A27D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB360855-CC19-4B13-9E8E-BC50712A27D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB360855-CC19-4B13-9E8E-BC50712A27D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB360855-CC19-4B13-9E8E-BC50712A27D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

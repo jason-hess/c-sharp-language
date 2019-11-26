@@ -123,12 +123,22 @@ namespace CSharpLang80
         }
     }
 
+    
     public class CustomCollection
     {
         private readonly string[] _names = new[] { "Alice", "Bob" };
-
         public int Length => _names.Length;
-
         public string this[int index] => _names[index];
+        public string[] Slice(int start, int end) => _names[start..^end];
+    }
+
+    public class TestClass
+    {
+        [Test]
+        public void ShouldIndex()
+        {
+            var c = new CustomCollection();
+            var v = c[1..^2];
+        }
     }
 }
