@@ -37,7 +37,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncEnumerableApp", "Async
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncEnumerableApp2", "AsyncEnumerableApp2\AsyncEnumerableApp2.csproj", "{AE1D518A-A482-4988-9A40-57FFF5C7922E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLang40", "CSharpLang40\CSharpLang40.csproj", "{BB360855-CC19-4B13-9E8E-BC50712A27D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpLang40", "CSharpLang40\CSharpLang40.csproj", "{BB360855-CC19-4B13-9E8E-BC50712A27D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLang90", "CSharpLang90\CSharpLang90.csproj", "{3B0B70BE-B146-4497-BD3A-509C4EB594DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,10 @@ Global
 		{BB360855-CC19-4B13-9E8E-BC50712A27D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB360855-CC19-4B13-9E8E-BC50712A27D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB360855-CC19-4B13-9E8E-BC50712A27D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B0B70BE-B146-4497-BD3A-509C4EB594DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B0B70BE-B146-4497-BD3A-509C4EB594DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B0B70BE-B146-4497-BD3A-509C4EB594DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B0B70BE-B146-4497-BD3A-509C4EB594DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

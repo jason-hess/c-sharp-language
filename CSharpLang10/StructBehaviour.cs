@@ -23,7 +23,7 @@ namespace CSharpLang10
             int y = 1;
             switch (y)
             {
-                case "10": return 0;
+                case 10: return 0;
                 default: return 1;
             }
         }
