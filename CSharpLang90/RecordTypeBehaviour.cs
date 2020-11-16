@@ -7,7 +7,18 @@ namespace CSharpLang90
     /// Records are immutable equatable objects.  Historically in C# mutable value and reference
     /// types are mutable and value types are passed by copy.
     /// </summary>
+    /// <remarks>Records are transpiled into classes</remarks>
     public record Person(string FirstName, string LastName);
+
+    /// <summary>
+    /// Records support inheritance
+    /// </summary>
+    public record AgedPerson(string FirstName, string LastName, int Age) : Person(FirstName, LastName);
+
+    /// <summary>
+    /// Records can be sealed 
+    /// </summary>
+    public sealed record SealedPerson(string FirstName, string LastName, int Age) : Person(FirstName, LastName);
 
     /// <summary>
     /// Previously you would have had to write a fair bit of code to create immutable objects
@@ -40,7 +51,7 @@ namespace CSharpLang90
     public class RecordBehaviour
     {
         [Test]
-        public void Shoud()
+        public void ShouldBeImmutable()
         {
             var firstPerson = new Person("Billy", "Bob");
             firstPerson.FirstName.Should().Be("Billy");
@@ -50,6 +61,32 @@ namespace CSharpLang90
             //secondPerson.FirstName = "Andy"; // Error CS0200  Property or indexer 'CSharp80Person.FirstName' cannot be assigned to --it is read only
             var thirdPerson = new CSharp80PersonV2("Danny", "Bob");
             thirdPerson.FirstName.Should().Be("Danny");
+        }
+
+        [Test]
+        public void ShouldBeEquatableWhenAllPropertiesAreTheSame() => 
+            new Person("Bob", "Jones")
+            .Should()
+            .Be(new Person("Bob", "Jones"));
+
+        [Test]
+        public void ShouldSameHashcodeAllPropertiesAreTheSame() =>
+            new Person("Bob", "Jones")
+            .GetHashCode()
+            .Should()
+            .Be(new Person("Bob", "Jones").GetHashCode());
+
+        [Test]
+        public void ShouldSupportCopyWith()
+        {
+            // Records can by copied with the `with` syntax
+            var firstPerson = new Person("Alice", "Jones");
+            // The `with` statement causes the protected copy constructor to be called
+            var brother = firstPerson with { FirstName = "Bob" };
+            // Identical copy
+            var secondPerson = firstPerson with { };
+            secondPerson.Should().Be(firstPerson);
+            secondPerson.Should().NotBeSameAs(firstPerson);
         }
     }
 }
