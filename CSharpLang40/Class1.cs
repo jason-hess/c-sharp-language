@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CSharpLang40
+﻿namespace CSharpLang40
 {
     public class Class1
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CSharpLangX
+﻿namespace CSharpLangX
 {
     public class Car
     {

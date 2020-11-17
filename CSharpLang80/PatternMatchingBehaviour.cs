@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Net.Sockets;
 using NUnit.Framework;
 
 namespace CSharpLang80
