@@ -12,6 +12,11 @@ namespace CSharpLang90
         {
             public string? Name { get; init; }
         }
+
+        public struct SupportedByStructToo
+        {
+            public string? Name { get; init; }
+        }
         
         [Test]
         public void Should()
