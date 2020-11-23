@@ -12,11 +12,6 @@ namespace CSharpLang90
         {
             public string? Name { get; init; }
         }
-
-        public struct SupportedByStructToo
-        {
-            public string? Name { get; init; }
-        }
         
         [Test]
         public void Should()
@@ -26,6 +21,27 @@ namespace CSharpLang90
 
             // `with` only works for Record types
             //var anotherThing = thing with { Name = "Another Thing" }; // Error CS8858  The receiver type 'InitOnlySetterBehaviour.InitOnlySetters' is not a valid record type.
+        }
+
+        public struct SupportedByStructToo
+        {
+            public string? Name { get; init; }
+        }
+
+        /// <summary>
+        /// Init only setters can be set in subclass constructors
+        /// </summary>
+        public class Subclass : InitOnlySetters
+        {
+            public Subclass()
+            {
+                Name = "Hello";
+            }
+
+            public void Other()
+            {
+                // Name = "Goodbye"; // Error CS8852  Init - only property or indexer 'InitOnlySetterBehaviour.InitOnlySetters.Name' can only be assigned in an object initializer, or on 'this' or 'base' in an instance constructor or an 'init' accessor.
+            }
         }
     }
 }

@@ -39,7 +39,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncEnumerableApp2", "Asyn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpLang40", "CSharpLang40\CSharpLang40.csproj", "{BB360855-CC19-4B13-9E8E-BC50712A27D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLang90", "CSharpLang90\CSharpLang90.csproj", "{3B0B70BE-B146-4497-BD3A-509C4EB594DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpLang90", "CSharpLang90\CSharpLang90.csproj", "{3B0B70BE-B146-4497-BD3A-509C4EB594DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLang90_TopLevelStatements", "CSharpLang90_TopLevelStatements\CSharpLang90_TopLevelStatements.csproj", "{D5693C63-B32C-420F-B4D9-CAA0BD5AA781}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +113,10 @@ Global
 		{3B0B70BE-B146-4497-BD3A-509C4EB594DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B0B70BE-B146-4497-BD3A-509C4EB594DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B0B70BE-B146-4497-BD3A-509C4EB594DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5693C63-B32C-420F-B4D9-CAA0BD5AA781}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5693C63-B32C-420F-B4D9-CAA0BD5AA781}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5693C63-B32C-420F-B4D9-CAA0BD5AA781}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5693C63-B32C-420F-B4D9-CAA0BD5AA781}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
