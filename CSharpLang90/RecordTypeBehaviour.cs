@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using System;
 
 namespace CSharpLang90
 {
@@ -30,28 +31,25 @@ namespace CSharpLang90
     /// <summary>
     /// Previously you would have had to write a fair bit of code to define an immutable class
     /// </summary>
-    public class CSharp80Person
+    public class CSharp80Person : IEquatable<CSharp80Person>
     {
-        public CSharp80Person(string firstName, string lastName)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-        }
-
-        public string FirstName { get; }
-        public string LastName { get; }
-    }
-
-    /// <summary>
-    /// Probably the least amount of code to define an immutable class in C# 8.0
-    /// </summary>
-    public class CSharp80PersonV2
-    {
-        public CSharp80PersonV2(string firstName, string lastName) =>
+        public CSharp80Person(string firstName, string lastName) =>
                (FirstName, LastName) = (firstName, lastName);
 
         public string FirstName { get; }
         public string LastName { get; }
+
+        public override bool Equals(object? obj)
+            => Equals(obj as CSharp80Person);
+
+        public bool Equals(CSharp80Person? other)
+        {
+            if (other == null) return false;
+            return (FirstName, LastName) == (other.FirstName, other.LastName);
+        }
+
+        public override int GetHashCode() => (FirstName, LastName).GetHashCode();
+
     }
 
     /// <summary>
@@ -65,7 +63,7 @@ namespace CSharpLang90
     public sealed record SealedPerson(string FirstName, string LastName, int Age) : Person(FirstName, LastName);
 
     /// <summary>
-    /// Records can have members defined and can definte members instead of the default members.
+    /// Records can have members defined and can define members instead of the default members.
     /// If a record type has a method that matches the signature of any synthesized method, the 
     /// compiler doesn't synthesize that method. 
     /// </summary>
@@ -95,8 +93,6 @@ namespace CSharpLang90
             var secondPerson = new CSharp80Person("Cody", "Bob");
             secondPerson.FirstName.Should().Be("Cody");
             //secondPerson.FirstName = "Andy"; // Error CS0200  Property or indexer 'CSharp80Person.FirstName' cannot be assigned to --it is read only
-            var thirdPerson = new CSharp80PersonV2("Danny", "Bob");
-            thirdPerson.FirstName.Should().Be("Danny");
         }
 
         /// <summary>
@@ -144,12 +140,17 @@ namespace CSharpLang90
             var brother = firstPerson with { FirstName = "Bob" };
             // Identical copy
             var secondPerson = firstPerson with { };
-            secondPerson.Should().Be(firstPerson);
-            secondPerson.Should().NotBeSameAs(firstPerson);
-            // Operator overloaded
+
+            firstPerson.Should().Be(secondPerson);
+            Equals(firstPerson, secondPerson).Should().BeTrue();
+
+            firstPerson.Should().NotBeSameAs(secondPerson);
+            ReferenceEquals(firstPerson, firstPerson).Should().BeFalse();
+
+            // Operator overloaded to call Equals
             (firstPerson == secondPerson).Should().BeTrue();
 
-            // Destructore is synthesised
+            // Destructor is synthesised
             var (first, last) = firstPerson;
         }
 
