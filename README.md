@@ -20,3 +20,8 @@ To build this project:
 OR
 
 2. Load Visual Studio 2022 or higher and build `CSharpLang.sln`
+
+## Tasks
+
+- [ ] Update NuGet Packages to Latest
+- [ ] Implement Setup Script that installs all necessary tools.
