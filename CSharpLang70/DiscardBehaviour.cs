@@ -17,7 +17,7 @@ namespace CSharpLang70
             var tuple = (Year: 1996, Age: 21, Sex: "Male");
             // Deconstruct the tuple, but don't care about the year:
             var (_, age, _) = tuple;
-            Assert.AreEqual(tuple.Age, age);
+            Assert.Equals(tuple.Age, age);
         }
 
         [Test]

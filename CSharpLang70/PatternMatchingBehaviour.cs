@@ -184,7 +184,7 @@ namespace CSharpLang70
             switch (aThing)
             {
                 case Thing theThing:
-                    theThing.Should().NotBeNull();
+                    (theThing == null).Should().BeFalse();
                     break;
                 default:
                     false.Should().BeTrue();

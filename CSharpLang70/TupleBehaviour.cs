@@ -63,8 +63,8 @@ namespace CSharpLang70
             var tuple = Tuple.Create("A", "B", "C");
             var secondTuple = new Tuple<string, string, string>("A", "B", "C");
 
-            Assert.AreEqual(tuple, secondTuple);
-            Assert.AreEqual(tuple.Item1, secondTuple.Item1);
+            Assert.Equals(tuple, secondTuple);
+            Assert.Equals(tuple.Item1, secondTuple.Item1);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace CSharpLang70
         public void SystemValueTuple()
         {
             var valueTuple = new ValueTuple<int, int>(1, 2);
-            Assert.AreEqual(valueTuple.Item1 + 1, valueTuple.Item2);
+            Assert.Equals(valueTuple.Item1 + 1, valueTuple.Item2);
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace CSharpLang70
             var tuple = ValueTuple.Create(1, 2);
             tuple.Item1 = 2;
 
-            Assert.AreEqual(tuple.Item1, tuple.Item2);
+            Assert.Equals(tuple.Item1, tuple.Item2);
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace CSharpLang70
         public void CSharp7Support()
         {
             (int, int) tuple = (1, 2); // Creates a ValueTuple under the hood
-            Assert.AreEqual(tuple.Item1 + 1, tuple.Item2);
+            Assert.Equals(tuple.Item1 + 1, tuple.Item2);
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace CSharpLang70
         public void TupleElementNamesCanBeSpecified()
         {
             var tuple = (Sum: 1, Count: 2);
-            Assert.AreEqual(tuple.Sum + 1, tuple.Count);
+            Assert.Equals(tuple.Sum + 1, tuple.Count);
         }
 
         [Test]
@@ -145,7 +145,7 @@ namespace CSharpLang70
 
             var tupleElement = tuple.Alpha;
 
-            Assert.AreEqual("1", tuple.Alpha);
+            Assert.Equals("1", tuple.Alpha);
         }
 
         /// <summary>

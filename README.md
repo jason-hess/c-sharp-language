@@ -23,5 +23,5 @@ OR
 
 ## Tasks
 
-- [ ] Update NuGet Packages to Latest
+- [X] Update NuGet Packages to Latest
 - [ ] Implement Setup Script that installs all necessary tools.

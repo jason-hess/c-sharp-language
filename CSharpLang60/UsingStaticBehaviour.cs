@@ -48,7 +48,7 @@ namespace CSharpLang60
         [Test]
         public void UsingStaticImportsNestedTypes()
         {
-            new NestedClass().Should().NotBeNull();
+            ((object)new NestedClass()).Should().NotBeNull();
         }
     }
 }
