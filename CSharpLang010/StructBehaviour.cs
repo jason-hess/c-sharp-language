@@ -112,11 +112,7 @@ namespace CSharpLang10
 
         // Within a `struct` definition, fields cannot be initialized unless they are static or const
         // public int Area = 10; // CS0573 non static struct member cannot have an initializer
-
     }
 
-    public class Colour
-    {
-
-    }
+    public class Colour { }
 }
