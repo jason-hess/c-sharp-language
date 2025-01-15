@@ -3,7 +3,7 @@
 ## Overview
 
 `c-sharp-language` contains an overview of the features available in C# spanning versions 1.0 through
-to 9.0 based on [The History of C#](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history).
+to 13.0 based on [The History of C#](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history).
 
 ## Structure
 
