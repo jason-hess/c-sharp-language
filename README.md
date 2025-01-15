@@ -20,7 +20,8 @@ attribute in the `.csproj` file:
 </Project>
 ```
 
-This downgrades the Roslyn compiler to the features of the C# language at that point in time.
+This downgrades the Roslyn compiler to the features of the C# language at that point in time.  The .NET Target Framework is .NET 9.0 for all C# projects
+in this solution - it's only the C# language features that shift from project to project.
 
 ## Tools
 
