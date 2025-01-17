@@ -20,12 +20,12 @@ namespace CSharpLang10
         public class AttributesCanBeAssociatedWithClasses
         {
             [Conditional("DEBUG")]
-            public void AttributesOnMethods([In, Out]int attributesOnParameters) { }
+            public void AttributesOnMethods([In, Out] int attributesOnParameters) { }
         }
 
-        public void MultipleAttributesCanBeSpecifiedInTwoForms1([In][Out]int arg) { }
-        public void MultipleAttributesCanBeSpecifiedInTwoForms2([In, Out]int arg) { }
-        public void MultipleAttributesCanBeSpecifiedInTwoForms3([Out, In]int arg) { }
+        public void MultipleAttributesCanBeSpecifiedInTwoForms1([In][Out] int arg) { }
+        public void MultipleAttributesCanBeSpecifiedInTwoForms2([In, Out] int arg) { }
+        public void MultipleAttributesCanBeSpecifiedInTwoForms3([Out, In] int arg) { }
 
         [Conditional("DEBUG")]
         [Conditional("TRACE")]

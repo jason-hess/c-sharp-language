@@ -50,7 +50,7 @@ namespace CSharpLang60
                 // as soon as the catch block is entered the stack is unwound which means
                 // that we lose the details of the stack as they were in the ThrowException 
                 // method.
-                throw;  
+                throw;
             }
         }
 
@@ -145,7 +145,7 @@ namespace CSharpLang60
             }
         }
 
-        
+
 
         private bool ShouldCatchException(Exception ex)
         {

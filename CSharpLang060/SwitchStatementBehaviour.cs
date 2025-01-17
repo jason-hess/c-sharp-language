@@ -155,17 +155,18 @@ namespace CSharpLang60
         }
 
 
-public bool IsWeekend(string dayOfWeek)
-{
-    if(dayOfWeek == "Sunday")
-    {
-        return true;
-    } else if (dayOfWeek == "Saturday")
-    {
-        return true;
-    }
-    return false;
-}
+        public bool IsWeekend(string dayOfWeek)
+        {
+            if (dayOfWeek == "Sunday")
+            {
+                return true;
+            }
+            else if (dayOfWeek == "Saturday")
+            {
+                return true;
+            }
+            return false;
+        }
 
         public class Thing
         {

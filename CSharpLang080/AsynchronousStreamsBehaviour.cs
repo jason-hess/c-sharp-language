@@ -10,7 +10,7 @@ namespace CSharpLang80
         [Test]
         public async Task TestEnumerator()
         {
-            await foreach(var s in GetStrings())
+            await foreach (var s in GetStrings())
             {
                 s.Length.Should().Be(1);
             }

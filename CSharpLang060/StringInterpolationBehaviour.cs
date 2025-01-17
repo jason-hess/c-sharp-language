@@ -28,7 +28,7 @@ namespace CSharpLang60
         [Test]
         public void AnyExpressionCanBeUsedInStringInterpolation2()
         {
-            var list = new[] {1, 2, 3};
+            var list = new[] { 1, 2, 3 };
             $"{(from item in list select item).Sum()}".Should().Be("6");
         }
 

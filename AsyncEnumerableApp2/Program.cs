@@ -48,12 +48,12 @@ namespace AsyncEnumerableApp2
 
         static async Task Main(string[] args)
         {
-            await foreach(var item in GenerateSequence())
+            await foreach (var item in GenerateSequence())
             {
                 Console.WriteLine(item);
             }
 
-            await using (var memoryStream = new MemoryStream());
+            await using (var memoryStream = new MemoryStream()) ;
 
 
             //Follow these steps to create a GitHub Access Token
@@ -75,7 +75,7 @@ namespace AsyncEnumerableApp2
             });
             CancellationTokenSource cancellationSource = new CancellationTokenSource();
 
-            
+
             try
             {
                 //var results = await runPagedQueryAsync(client, PagedIssueQuery, "docs",

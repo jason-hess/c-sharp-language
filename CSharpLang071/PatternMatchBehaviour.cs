@@ -43,8 +43,8 @@ namespace CSharpLang71
                     Console.WriteLine(result);
                     break;
                 //case null: // Not possible with where T : class on the parameter
-                    // Do nothing for a null.
-                    //break;
+                // Do nothing for a null.
+                //break;
                 default:
                     Console.WriteLine($"A instance of type {coll.GetType().Name}");
                     break;

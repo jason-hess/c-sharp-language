@@ -25,7 +25,7 @@ namespace CSharpLang80
     /// </summary>
     public class NullableReferenceBehaviour
     {
-        static readonly HashSet<string> _contextFilters = new  HashSet<string>()
+        static readonly HashSet<string> _contextFilters = new HashSet<string>()
         {
             // unnecessary function host noise
             "Host.Aggregator",
@@ -84,8 +84,8 @@ namespace CSharpLang80
         void DoStuff(TIn input);
     }
 
-    public class DoStuffer<TIn, TOut> : IDoStuff<TIn, TOut> 
-        where TIn : notnull 
+    public class DoStuffer<TIn, TOut> : IDoStuff<TIn, TOut>
+        where TIn : notnull
         where TOut : notnull
     {
         public void DoStuff(TIn input)

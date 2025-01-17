@@ -123,7 +123,7 @@ namespace CSharpLang80
         }
     }
 
-    
+
     public class CustomCollection
     {
         private readonly string[] _names = new[] { "Alice", "Bob" };

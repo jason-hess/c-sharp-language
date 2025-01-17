@@ -23,7 +23,7 @@ namespace CSharpLang60
         public void Test(bool? value)
         {
             var isWeekend = value;
-            if(isWeekend == null)
+            if (isWeekend == null)
             {
                 System.Console.WriteLine("HERE");
             }

@@ -62,7 +62,7 @@ namespace CSharpLang73
         /// </remarks>
         public class UnmanagedTypeConstraint
         {
-            public static string TypeName<T>(T value) where T : unmanaged => 
+            public static string TypeName<T>(T value) where T : unmanaged =>
                 typeof(T).FullName;
 
             [Test]
@@ -78,7 +78,7 @@ namespace CSharpLang73
         /// </summary>
         public class DelegateTypeConstraint
         {
-            public static TDelegate Combine<TDelegate>(TDelegate first, TDelegate second) where TDelegate : Delegate => 
+            public static TDelegate Combine<TDelegate>(TDelegate first, TDelegate second) where TDelegate : Delegate =>
                 Delegate.Combine(first, second) as TDelegate;
 
             [Test]

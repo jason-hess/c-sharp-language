@@ -22,17 +22,17 @@ namespace CSharpLang80
             public int Y;
 
             //public override readonly string ToString() => 
-              //  $"{X} {Y} {Distance}"; // WWarning CS8656  Call to non-readonly member 'StructBehaviour.Point.Distance.get' from a 'readonly' member results in an implicit copy of 'this'.
+            //  $"{X} {Y} {Distance}"; // WWarning CS8656  Call to non-readonly member 'StructBehaviour.Point.Distance.get' from a 'readonly' member results in an implicit copy of 'this'.
 
-                public void Test()
+            public void Test()
             {
                 Y++;
             }
 
-                // Note: Adding readonly here then makes the compiler make the fields accessed by 
-                // this method read-only in the Struct read-only
+            // Note: Adding readonly here then makes the compiler make the fields accessed by 
+            // this method read-only in the Struct read-only
             //public readonly string ToReadOnlyString() =>
-              //  $"{X++} {ReadOnlyDistance}"; // Error CS1604  Cannot assign to 'X' because it is read-only CSharpLang80    
+            //  $"{X++} {ReadOnlyDistance}"; // Error CS1604  Cannot assign to 'X' because it is read-only CSharpLang80    
 
 
         }
