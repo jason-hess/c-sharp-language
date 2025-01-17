@@ -1,0 +1,9 @@
+<Project>
+
+    <ItemGroup>
+        <ProjectReference
+            Include="..\CSharpLang.Dependencies\CSharpLang.Dependencies.csproj"
+            Condition=" '$(MSBuildProjectName)' != 'CSharpLang.Dependencies' " />
+    </ItemGroup>
+
+</Project>
