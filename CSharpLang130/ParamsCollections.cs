@@ -25,7 +25,7 @@ namespace CSharpLang130
         }
 
         [Test]
-        public void ShouldAdd() => 
+        public void ShouldAdd() =>
             Add(1, 2, 3).Should().Be(6);
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace CSharpLang130
         /// and then call the method.
         /// </summary>
         [Test]
-        public void ShouldAddAsSpan() => 
+        public void ShouldAddAsSpan() =>
             AddAsSpan(1, 2, 3).Should().Be(6);
     }
 }
