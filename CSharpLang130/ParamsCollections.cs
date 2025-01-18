@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
-using System.Collections.Immutable;
 
 namespace CSharpLang130
 {
@@ -26,10 +25,11 @@ namespace CSharpLang130
         }
 
         [Test]
-        public void ShouldAdd() => Add(1, 2, 3).Should().Be(6);
+        public void ShouldAdd() => 
+            Add(1, 2, 3).Should().Be(6);
 
         /// <summary>
-        /// In C# 13, you can now use any of:
+        /// In C# 13, `params` now supports any of:
         ///   - A single-dimensional array
         ///   - `Span<T>` or `ReadOnlySpan<T>`
         ///   - A type that is supported by a Collection expression
@@ -63,6 +63,7 @@ namespace CSharpLang130
         /// and then call the method.
         /// </summary>
         [Test]
-        public void ShouldAddAsSpan() => AddAsSpan(1, 2, 3).Should().Be(6);
+        public void ShouldAddAsSpan() => 
+            AddAsSpan(1, 2, 3).Should().Be(6);
     }
 }
