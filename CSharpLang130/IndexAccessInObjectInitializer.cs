@@ -36,6 +36,7 @@ public class IndexAccessInObjectInitializer
             }
         };
 
+        // See: https://sharplab.io/#v2:CYLg1APgAgTAjAWAFBQMwAJboMLoN7LpGYZYCSAdgJYAuVANlQF4CGARvQKaHEFLECS6KhRoBtALroAai3oBXTugC86CpwDuw0WLgAGCQG4eRAL7IT6APQ30AHgDO8gLbOWAJwCeAPks2r6AAqABZKVM4ADowAxrToAEQAZu4A9s7oNKHonBTA8drAnAAe6CkRnO4sNCnuADToAHr1VA5qKVpy9O2cwNroLBSlbABWnNE02rRUcswV2UUR7pwODlQpFAB0frZ2Vk6uHj6WaJgALOgAysEp8vTAABQAlJZ8gsQA+ipqmuiUU4ysDicJ6WASvN6CWQKJTKUEQ8EQiFiBpwKSqPS1OGIojImBo9BwTH8bFvZGofEwIkk0kNU741BU6kCZEAVnxp0ZTJxDQAbPiWZyuciAOz4nmCpnIgAc+OFEupyIAnPipfKScj9PjFVjBOZiW9TMZ9eg9aYgA=
 
         // The above transpiles to the following:
         //     public class Initilizable
