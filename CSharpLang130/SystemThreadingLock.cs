@@ -3,7 +3,7 @@
 namespace CSharpLang130
 {
     /// <summary>
-    /// C# 13 introduces the System.Threading.Lock class which offers better performance
+    /// C# 13 introduces the System.Threading.Lock class which offers 25% better performance
     /// than the System.Threading.Monitor.
     /// </summary>
     /// <see href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-13#new-lock-object"/>
@@ -83,7 +83,7 @@ namespace CSharpLang130
             }
 
             // The above transpiles to:
-            object obj = new Lock(); // 
+            object obj = new Lock(); // CS9216: A value of type System.Threading.Lock converted to a different type will use likely unintended monitor-based locking in lock statement.
             bool lockTaken = false;
             try
             {
